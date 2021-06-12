@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:572817426109:android:9c0e3d2fc28eb059d819d4",
+        "mobilesdk_app_id": "1:572817426109:android:1a5dc10043690a92d819d4",
         "android_client_info": {
-          "package_name": "com.wisedigitalhq.emiliosApp"
+          "package_name": "com.wisedigitalhq.emiliosMarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "572817426109-jgbi521dpm7rlkjakeqts9ua1qsank99.apps.googleusercontent.com",
+          "client_id": "572817426109-eu4jgc28a74t39pmnsjv00gu0k9ojuih.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.wisedigitalhq.emiliosApp",
+            "package_name": "com.wisedigitalhq.emiliosMarket",
             "certificate_hash": "5fa74c5cea5992fc29e6eb3811768df8aeabed36"
           }
         },
