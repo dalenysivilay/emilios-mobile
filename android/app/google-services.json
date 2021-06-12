@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:572817426109:android:fec6a19bee3f2936d819d4",
+        "mobilesdk_app_id": "1:572817426109:android:9c0e3d2fc28eb059d819d4",
         "android_client_info": {
-          "package_name": "com.wisedigitalhq.emiliosMarket"
+          "package_name": "com.wisedigitalhq.emiliosApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "572817426109-eu4jgc28a74t39pmnsjv00gu0k9ojuih.apps.googleusercontent.com",
+          "client_id": "572817426109-jgbi521dpm7rlkjakeqts9ua1qsank99.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.wisedigitalhq.emiliosMarket",
+            "package_name": "com.wisedigitalhq.emiliosApp",
             "certificate_hash": "5fa74c5cea5992fc29e6eb3811768df8aeabed36"
           }
         },
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "572817426109-nvkoiuss952s7lmvt9d0a6qdoedlcf9d.apps.googleusercontent.com",
+              "client_id": "572817426109-9mjnu5fl1562u976rhd2m0spdn9o8a49.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.wisedigital.emiliosMarket"
+                "bundle_id": "com.wisedigitalhq.emiliosApp"
               }
             }
           ]
