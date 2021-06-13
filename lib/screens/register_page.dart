@@ -14,7 +14,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   // Built an alert dialog to display errors
-  Future<void> _alertDialogBuilder() async {
+  Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
           return AlertDialog(
             title: Text("Error"),
             content: Container(
-              child: Text("Text goes here"),
+              child: Text(error),
             ),
             actions: [
               TextButton(
@@ -57,7 +57,25 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  void _submitForm() {}
+  void _submitForm() async {
+    //Set form to loading state
+    setState(() {
+      _registerFormLoading = true;
+    });
+    //Run create account method
+    String? _createAccountFeedback = await _createAccount();
+    //If string is not null there is an error while creating account
+    if (_createAccountFeedback != null) {
+      _alertDialogBuilder(_createAccountFeedback);
+      // Set the form to regular state [not loading].
+      setState(() {
+        _registerFormLoading = false;
+      });
+    } else {
+      //String was null, user is logged in
+      Navigator.pop(context);
+    }
+  }
 
   //Form Input Field Values
   String _registerEmail = "";
@@ -70,8 +88,6 @@ class _RegisterPageState extends State<RegisterPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: size.height,
-        width: double.infinity,
         child: Stack(
           children: [
             Positioned(
@@ -82,84 +98,69 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: double.infinity,
               ),
             ),
-            SafeArea(
-              child: Container(
-                width: double.infinity,
-                height: size.height * 0.80,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image(
-                      image:
-                          AssetImage('assets/images/emilio-grocery-logo.png'),
-                    ),
-                    RoundedInputField(
-                      hintText: "Name",
-                      icon: Icons.person,
-                      onChanged: (value) {
-                        _registerName = value;
-                      },
-                      onSubmitted: () {},
-                      textInputAction: TextInputAction.next,
-                    ),
-                    RoundedInputField(
-                      hintText: "Phone Number",
-                      icon: Icons.phone,
-                      onChanged: (value) {
-                        _registerPhone = value;
-                      },
-                      onSubmitted: () {},
-                      textInputAction: TextInputAction.next,
-                    ),
-                    RoundedInputField(
-                      hintText: "Email Address",
-                      onChanged: (value) {
-                        _registerEmail = value;
-                      },
-                      onSubmitted: () {},
-                      textInputAction: TextInputAction.next,
-                    ),
-                    RoundedPasswordField(
-                      onChanged: (value) {
-                        _registerPassword = value;
-                      },
-                    ),
-                    RoundedButton(
-                      isLoading: _registerFormLoading,
-                      text: "SIGN UP",
-                      onPressed: () {
-                        _submitForm();
-                      },
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Already have an Account? ",
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            },
-                            child: Text(
-                              "Back to Login",
+            ListView(
+              children: [
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image(
+                        image:
+                            AssetImage('assets/images/emilio-grocery-logo.png'),
+                      ),
+                      RoundedInputField(
+                        hintText: "Email Address",
+                        onChanged: (value) {
+                          _registerEmail = value;
+                        },
+                        onSubmitted: (value) {},
+                        textInputAction: TextInputAction.next,
+                      ),
+                      RoundedPasswordField(
+                        onChanged: (value) {
+                          _registerPassword = value;
+                        },
+                        onSubmitted: (value) {
+                          _submitForm();
+                        },
+                      ),
+                      RoundedButton(
+                        isLoading: _registerFormLoading,
+                        text: "SIGN UP",
+                        onPressed: () {
+                          _submitForm();
+                        },
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Already have an Account? ",
                               style: TextStyle(
                                 color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ]),
-                  ],
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()),
+                                );
+                              },
+                              child: Text(
+                                "Back to Login",
+                                style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ]),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
