@@ -2,6 +2,7 @@ import 'package:emilios_market/screens/login_page.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/widgets/rounded_input_field.dart';
 import 'package:emilios_market/widgets/rounded_password_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants.dart';
@@ -38,26 +39,31 @@ class _RegisterPageState extends State<RegisterPage> {
   //Default form loading State
   bool _registerFormLoading = false;
 
+  //Create New User account
+  Future<String?> _createAccount() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _registerEmail, password: _registerPassword);
+      return null;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        return 'The account already exists for that email.';
+      }
+      return e.message;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  void _submitForm() {}
+
   //Form Input Field Values
   String _registerEmail = "";
   String _registerPassword = "";
   String _registerName = "";
   String _registerPhone = "";
-
-  //Focus Node for input fields
-  late FocusNode _passwordFocusNode;
-
-  @override
-  void initState() {
-    _passwordFocusNode = FocusNode();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _passwordFocusNode.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,24 +116,19 @@ class _RegisterPageState extends State<RegisterPage> {
                       onChanged: (value) {
                         _registerEmail = value;
                       },
-                      onSubmitted: () {
-                        _passwordFocusNode.requestFocus();
-                      },
+                      onSubmitted: () {},
                       textInputAction: TextInputAction.next,
                     ),
                     RoundedPasswordField(
                       onChanged: (value) {
                         _registerPassword = value;
                       },
-                      focusNode: _passwordFocusNode,
                     ),
                     RoundedButton(
                       isLoading: _registerFormLoading,
                       text: "SIGN UP",
                       onPressed: () {
-                        setState(() {
-                          _registerFormLoading = true;
-                        });
+                        _submitForm();
                       },
                     ),
                     Row(
