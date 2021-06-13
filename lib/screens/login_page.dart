@@ -55,11 +55,11 @@ class body extends StatelessWidget {
             RoundedInputField(
               hintText: "Email Address",
               onChanged: (value) {},
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {},
+              onSubmitted: () {},
+              textInputAction: TextInputAction.next,
             ),
             RoundedButton(
+              isLoading: false,
               text: "LOGIN",
               onPressed: () {},
             ),

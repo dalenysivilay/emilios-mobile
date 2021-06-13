@@ -35,6 +35,30 @@ class _RegisterPageState extends State<RegisterPage> {
         });
   }
 
+  //Default form loading State
+  bool _registerFormLoading = false;
+
+  //Form Input Field Values
+  String _registerEmail = "";
+  String _registerPassword = "";
+  String _registerName = "";
+  String _registerPhone = "";
+
+  //Focus Node for input fields
+  late FocusNode _passwordFocusNode;
+
+  @override
+  void initState() {
+    _passwordFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -55,8 +79,9 @@ class _RegisterPageState extends State<RegisterPage> {
             SafeArea(
               child: Container(
                 width: double.infinity,
+                height: size.height * 0.80,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image(
                       image:
@@ -65,24 +90,44 @@ class _RegisterPageState extends State<RegisterPage> {
                     RoundedInputField(
                       hintText: "Name",
                       icon: Icons.person,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        _registerName = value;
+                      },
+                      onSubmitted: () {},
+                      textInputAction: TextInputAction.next,
                     ),
                     RoundedInputField(
                       hintText: "Phone Number",
                       icon: Icons.phone,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        _registerPhone = value;
+                      },
+                      onSubmitted: () {},
+                      textInputAction: TextInputAction.next,
                     ),
                     RoundedInputField(
                       hintText: "Email Address",
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        _registerEmail = value;
+                      },
+                      onSubmitted: () {
+                        _passwordFocusNode.requestFocus();
+                      },
+                      textInputAction: TextInputAction.next,
                     ),
                     RoundedPasswordField(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        _registerPassword = value;
+                      },
+                      focusNode: _passwordFocusNode,
                     ),
                     RoundedButton(
+                      isLoading: _registerFormLoading,
                       text: "SIGN UP",
                       onPressed: () {
-                        _alertDialogBuilder();
+                        setState(() {
+                          _registerFormLoading = true;
+                        });
                       },
                     ),
                     Row(

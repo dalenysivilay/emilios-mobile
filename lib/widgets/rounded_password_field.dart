@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final FocusNode focusNode;
   const RoundedPasswordField({
     Key? key,
     required this.onChanged,
+    required this.focusNode,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,8 @@ class RoundedPasswordField extends StatelessWidget {
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         onChanged: onChanged,
+        focusNode: focusNode,
+        obscureText: true,
         decoration: InputDecoration(
           icon: Icon(
             Icons.lock,
