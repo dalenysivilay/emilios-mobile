@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -34,7 +35,7 @@ class LandingPage extends StatelessWidget {
               // Connection state is active - Check user login
               if (streamSnapshot.connectionState == ConnectionState.active) {
                 //Get user
-                Object? _user = streamSnapshot.data;
+                User _user = streamSnapshot.data;
                 //If user is null, user is not logged in
                 if (_user == null) {
                   return LoginPage();

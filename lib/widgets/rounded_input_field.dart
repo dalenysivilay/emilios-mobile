@@ -1,45 +1,42 @@
-import 'package:emilios_market/constants.dart';
 import 'package:flutter/material.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
-  final IconData icon;
-  final Function onSubmitted;
+  final Function(String) onChanged;
+  final Function(String) onSubmitted;
   final TextInputAction textInputAction;
-  final ValueChanged<String> onChanged;
-  const RoundedInputField({
-    Key? key,
-    required this.hintText,
-    required this.onChanged,
-    required this.onSubmitted,
-    required this.textInputAction,
-    this.icon = Icons.mail,
-  }) : super(key: key);
+  final bool isPasswordField;
+  RoundedInputField({
+    this.hintText,
+    this.onChanged,
+    this.onSubmitted,
+    this.textInputAction,
+    this.isPasswordField,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    bool _isPasswordField = isPasswordField ?? false;
+
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * 0.75,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
+      margin: EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 24.0,
       ),
+      decoration: BoxDecoration(
+          color: Color(0xFFF2F2F2), borderRadius: BorderRadius.circular(12.0)),
       child: TextField(
-        keyboardType: TextInputType.emailAddress,
+        obscureText: _isPasswordField,
         onChanged: onChanged,
-        onSubmitted: onSubmitted(),
+        onSubmitted: onSubmitted,
         textInputAction: textInputAction,
         decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: kPrimaryColor,
-          ),
-          hintText: hintText,
-          border: InputBorder.none,
-        ),
+            border: InputBorder.none,
+            hintText: hintText ?? "Hint Text...",
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 20.0,
+            )),
       ),
     );
   }

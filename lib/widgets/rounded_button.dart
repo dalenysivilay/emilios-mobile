@@ -1,37 +1,47 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 class RoundedButton extends StatelessWidget {
   final String text;
   final Function onPressed;
+  final bool outlineBtn;
   final bool isLoading;
-
-  RoundedButton({
-    Key? key,
-    required this.text,
-    required this.onPressed,
-    required this.isLoading,
-  }) : super(key: key);
+  RoundedButton({this.text, this.onPressed, this.outlineBtn, this.isLoading});
 
   @override
   Widget build(BuildContext context) {
+    bool _outlineBtn = outlineBtn ?? false;
     bool _isLoading = isLoading ?? false;
-    Size size = MediaQuery.of(context).size;
-    double width = size.width * 0.75;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextButton(
-        onPressed: () => onPressed(),
+
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        height: 65.0,
+        decoration: BoxDecoration(
+          color: _outlineBtn ? Colors.transparent : Colors.black,
+          border: Border.all(
+            color: Colors.black,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(
+            12.0,
+          ),
+        ),
+        margin: EdgeInsets.symmetric(
+          horizontal: 24.0,
+          vertical: 8.0,
+        ),
         child: Stack(
           children: [
             Visibility(
               visible: _isLoading ? false : true,
               child: Center(
                 child: Text(
-                  text,
+                  text ?? "Text",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                    fontSize: 16.0,
+                    color: _outlineBtn ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -39,20 +49,13 @@ class RoundedButton extends StatelessWidget {
               visible: _isLoading,
               child: Center(
                 child: SizedBox(
-                  height: 24,
-                  width: 24,
+                  height: 30.0,
+                  width: 30.0,
                   child: CircularProgressIndicator(),
                 ),
               ),
             ),
           ],
-        ),
-        style: TextButton.styleFrom(
-          minimumSize: Size(width, 50),
-          backgroundColor: kPrimaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
         ),
       ),
     );

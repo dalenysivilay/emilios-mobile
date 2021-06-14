@@ -13,7 +13,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // Built an alert dialog to display errors
+  // Build an alert dialog to display some errors.
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
         context: context,
@@ -26,21 +26,18 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             actions: [
               TextButton(
+                child: Text("Close Dialog"),
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Close Dialog"),
               )
             ],
           );
         });
   }
 
-  //Default form loading State
-  bool _registerFormLoading = false;
-
-  //Create New User account
-  Future<String?> _createAccount() async {
+  // Create a new user account
+  Future<String> _createAccount() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _registerEmail, password: _registerPassword);
@@ -58,111 +55,100 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _submitForm() async {
-    //Set form to loading state
+    // Set the form to loading state
     setState(() {
       _registerFormLoading = true;
     });
-    //Run create account method
-    String? _createAccountFeedback = await _createAccount();
-    //If string is not null there is an error while creating account
+
+    // Run the create account method
+    String _createAccountFeedback = await _createAccount();
+
+    // If the string is not null, we got error while create account.
     if (_createAccountFeedback != null) {
       _alertDialogBuilder(_createAccountFeedback);
+
       // Set the form to regular state [not loading].
       setState(() {
         _registerFormLoading = false;
       });
     } else {
-      //String was null, user is logged in
+      // The String was null, user is logged in.
       Navigator.pop(context);
     }
   }
 
-  //Form Input Field Values
+  // Default Form Loading State
+  bool _registerFormLoading = false;
+
+  // Form Input Field Values
   String _registerEmail = "";
   String _registerPassword = "";
-  String _registerName = "";
-  String _registerPhone = "";
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        child: Stack(
-          children: [
-            Positioned(
-              child: Image(
-                image: AssetImage('assets/images/home-login-bg.png'),
-                fit: BoxFit.cover,
-                height: size.height,
-                width: double.infinity,
-              ),
-            ),
-            ListView(
-              children: [
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image(
-                        image:
-                            AssetImage('assets/images/emilio-grocery-logo.png'),
-                      ),
-                      RoundedInputField(
-                        hintText: "Email Address",
-                        onChanged: (value) {
-                          _registerEmail = value;
-                        },
-                        onSubmitted: (value) {},
-                        textInputAction: TextInputAction.next,
-                      ),
-                      RoundedPasswordField(
-                        onChanged: (value) {
-                          _registerPassword = value;
-                        },
-                        onSubmitted: (value) {
-                          _submitForm();
-                        },
-                      ),
-                      RoundedButton(
-                        isLoading: _registerFormLoading,
-                        text: "SIGN UP",
-                        onPressed: () {
-                          _submitForm();
-                        },
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Already have an Account? ",
-                              style: TextStyle(
-                                color: kPrimaryColor,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                );
-                              },
-                              child: Text(
-                                "Back to Login",
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ]),
-                    ],
-                  ),
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                  top: 24.0,
                 ),
-              ],
-            ),
-          ],
+                child: Text(
+                  "Create A New Account",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Column(
+                children: [
+                  RoundedInputField(
+                    hintText: "Email...",
+                    onChanged: (value) {
+                      _registerEmail = value;
+                    },
+                    onSubmitted: (value) {},
+                    textInputAction: TextInputAction.next,
+                    isPasswordField: false,
+                  ),
+                  RoundedInputField(
+                    hintText: "Password...",
+                    onChanged: (value) {
+                      _registerPassword = value;
+                    },
+                    isPasswordField: true,
+                    onSubmitted: (value) {
+                      _submitForm();
+                    },
+                    textInputAction: TextInputAction.done,
+                  ),
+                  RoundedButton(
+                    text: "Create New Account",
+                    onPressed: () {
+                      _submitForm();
+                    },
+                    isLoading: _registerFormLoading,
+                    outlineBtn: false,
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 16.0,
+                ),
+                child: RoundedButton(
+                  text: "Back To Login",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  isLoading: _registerFormLoading,
+                  outlineBtn: true,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
