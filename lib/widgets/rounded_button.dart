@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import constan
+import 'package:emilios_market/constants.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -18,9 +18,9 @@ class RoundedButton extends StatelessWidget {
       child: Container(
         height: 65.0,
         decoration: BoxDecoration(
-          color: _outlineBtn ? Colors.transparent : Colors.black,
+          color: _outlineBtn ? Colors.transparent : kPrimaryColor,
           border: Border.all(
-            color: Colors.black,
+            color: kPrimaryColor,
             width: 2.0,
           ),
           borderRadius: BorderRadius.circular(
@@ -40,7 +40,7 @@ class RoundedButton extends StatelessWidget {
                   text ?? "Text",
                   style: TextStyle(
                     fontSize: 16.0,
-                    color: _outlineBtn ? Colors.black : Colors.white,
+                    color: _outlineBtn ? kPrimaryColor : Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

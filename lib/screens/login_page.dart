@@ -84,70 +84,75 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          alignment: Alignment.center,
           width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                  top: 24.0,
-                ),
-                child: Text(
-                  "Welcome User,\nLogin to your account",
-                  textAlign: TextAlign.center,
-                ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home-login-bg.png',
               ),
-              Column(
-                children: [
-                  RoundedInputField(
-                    hintText: "Email...",
-                    onChanged: (value) {
-                      _loginEmail = value;
-                    },
-                    onSubmitted: (value) {},
-                    textInputAction: TextInputAction.next,
-                    isPasswordField: false,
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'assets/images/emilio-grocery-logo.png',
+                ),
+                Column(
+                  children: [
+                    RoundedInputField(
+                      hintText: "Email...",
+                      onChanged: (value) {
+                        _loginEmail = value;
+                      },
+                      onSubmitted: (value) {},
+                      textInputAction: TextInputAction.next,
+                      isPasswordField: false,
+                    ),
+                    RoundedInputField(
+                      hintText: "Password...",
+                      onChanged: (value) {
+                        _loginPassword = value;
+                      },
+                      isPasswordField: true,
+                      onSubmitted: (value) {
+                        _submitForm();
+                      },
+                      textInputAction: TextInputAction.done,
+                    ),
+                    RoundedButton(
+                      text: "Login",
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      isLoading: _loginFormLoading,
+                      outlineBtn: false,
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 16.0,
                   ),
-                  RoundedInputField(
-                    hintText: "Password...",
-                    onChanged: (value) {
-                      _loginPassword = value;
-                    },
-                    isPasswordField: true,
-                    onSubmitted: (value) {
-                      _submitForm();
-                    },
-                    textInputAction: TextInputAction.done,
-                  ),
-                  RoundedButton(
-                    text: "Login",
+                  child: RoundedButton(
+                    text: "Create New Account",
                     onPressed: () {
-                      _submitForm();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return RegisterPage();
+                        }),
+                      );
                     },
-                    isLoading: _loginFormLoading,
-                    outlineBtn: false,
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 16.0,
+                    outlineBtn: true,
+                  ),
                 ),
-                child: RoundedButton(
-                  text: "Create New Account",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return RegisterPage();
-                      }),
-                    );
-                  },
-                  outlineBtn: true,
-                  isLoading: _loginFormLoading,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
