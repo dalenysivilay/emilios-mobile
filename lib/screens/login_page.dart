@@ -2,6 +2,7 @@ import 'package:emilios_market/screens/register_page.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/widgets/rounded_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -82,63 +83,59 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/home-login-bg.png',
-              ),
-              fit: BoxFit.cover,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/home-login-bg.png',
             ),
+            fit: BoxFit.cover,
           ),
-          child: SingleChildScrollView(
-            reverse: true,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  'assets/images/emilio-grocery-logo.png',
-                ),
-                Column(
-                  children: [
-                    RoundedInputField(
-                      hintText: "Email...",
-                      onChanged: (value) {
-                        _loginEmail = value;
-                      },
-                      onSubmitted: (value) {},
-                      textInputAction: TextInputAction.next,
-                      isPasswordField: false,
-                    ),
-                    RoundedInputField(
-                      hintText: "Password...",
-                      onChanged: (value) {
-                        _loginPassword = value;
-                      },
-                      isPasswordField: true,
-                      onSubmitted: (value) {
-                        _submitForm();
-                      },
-                      textInputAction: TextInputAction.done,
-                    ),
-                    RoundedButton(
-                      text: "Login",
-                      onPressed: () {
-                        _submitForm();
-                      },
-                      isLoading: _loginFormLoading,
-                      outlineBtn: false,
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 16.0,
+        ),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Container(
+              height: MediaQuery.of(context).size.height - 30.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    'assets/images/emilio-grocery-logo.png',
                   ),
-                  child: RoundedButton(
+                  Column(
+                    children: [
+                      RoundedInputField(
+                        hintText: "Email...",
+                        onChanged: (value) {
+                          _loginEmail = value;
+                        },
+                        onSubmitted: (value) {},
+                        textInputAction: TextInputAction.next,
+                        isPasswordField: false,
+                      ),
+                      RoundedInputField(
+                        hintText: "Password...",
+                        onChanged: (value) {
+                          _loginPassword = value;
+                        },
+                        isPasswordField: true,
+                        onSubmitted: (value) {
+                          _submitForm();
+                        },
+                        textInputAction: TextInputAction.done,
+                      ),
+                      RoundedButton(
+                        text: "Login",
+                        onPressed: () {
+                          _submitForm();
+                        },
+                        isLoading: _loginFormLoading,
+                        outlineBtn: false,
+                      )
+                    ],
+                  ),
+                  RoundedButton(
                     text: "Create New Account",
                     onPressed: () {
                       Navigator.push(
@@ -150,8 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     outlineBtn: true,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

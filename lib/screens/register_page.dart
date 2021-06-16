@@ -90,6 +90,14 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home-login-bg.png',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -97,9 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: EdgeInsets.only(
                   top: 24.0,
                 ),
-                child: Text(
-                  "Create A New Account",
-                  textAlign: TextAlign.center,
+                child: Image.asset(
+                  'assets/images/emilio-grocery-logo.png',
                 ),
               ),
               Column(

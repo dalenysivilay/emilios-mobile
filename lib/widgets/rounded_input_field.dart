@@ -1,3 +1,4 @@
+import 'package:emilios_market/constants.dart';
 import 'package:flutter/material.dart';
 
 class RoundedInputField extends StatelessWidget {
@@ -26,6 +27,8 @@ class RoundedInputField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Color(0xFFF2F2F2), borderRadius: BorderRadius.circular(12.0)),
       child: TextField(
+        keyboardType: TextInputType.emailAddress,
+        cursorColor: kPrimaryColor,
         obscureText: _isPasswordField,
         onChanged: onChanged,
         onSubmitted: onSubmitted,
