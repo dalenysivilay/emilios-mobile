@@ -1,3 +1,4 @@
+import 'package:emilios_market/constants.dart';
 import 'package:emilios_market/screens/register_page.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/widgets/rounded_input_field.dart';
@@ -93,62 +94,68 @@ class _LoginPageState extends State<LoginPage> {
             fit: BoxFit.cover,
           ),
         ),
+        alignment: Alignment.center,
         child: SingleChildScrollView(
           child: SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height - 30.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    'assets/images/emilio-grocery-logo.png',
-                  ),
-                  Column(
-                    children: [
-                      RoundedInputField(
-                        hintText: "Email...",
-                        onChanged: (value) {
-                          _loginEmail = value;
-                        },
-                        onSubmitted: (value) {},
-                        textInputAction: TextInputAction.next,
-                        isPasswordField: false,
-                      ),
-                      RoundedInputField(
-                        hintText: "Password...",
-                        onChanged: (value) {
-                          _loginPassword = value;
-                        },
-                        isPasswordField: true,
-                        onSubmitted: (value) {
-                          _submitForm();
-                        },
-                        textInputAction: TextInputAction.done,
-                      ),
-                      RoundedButton(
-                        text: "Login",
-                        onPressed: () {
-                          _submitForm();
-                        },
-                        isLoading: _loginFormLoading,
-                        outlineBtn: false,
-                      )
-                    ],
-                  ),
-                  RoundedButton(
-                    text: "Create New Account",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return RegisterPage();
-                        }),
-                      );
-                    },
-                    outlineBtn: true,
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                const SizedBox(height: 20.0),
+                Image.asset(
+                  'assets/images/emilio-grocery-logo.png',
+                ),
+                Column(
+                  children: [
+                    const SizedBox(height: 90.0),
+                    Text(
+                      "LOGIN",
+                      style: h1,
+                    ),
+                    const SizedBox(height: 20.0),
+                    RoundedInputField(
+                      hintText: "Email...",
+                      onChanged: (value) {
+                        _loginEmail = value;
+                      },
+                      onSubmitted: (value) {},
+                      textInputAction: TextInputAction.next,
+                      isPasswordField: false,
+                    ),
+                    RoundedInputField(
+                      hintText: "Password...",
+                      onChanged: (value) {
+                        _loginPassword = value;
+                      },
+                      isPasswordField: true,
+                      onSubmitted: (value) {
+                        _submitForm();
+                      },
+                      textInputAction: TextInputAction.done,
+                    ),
+                    RoundedButton(
+                      text: "Login",
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      isLoading: _loginFormLoading,
+                      outlineBtn: false,
+                    )
+                  ],
+                ),
+                const SizedBox(height: 90.0),
+                RoundedButton(
+                  text: "Create New Account",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return RegisterPage();
+                      }),
+                    );
+                  },
+                  outlineBtn: true,
+                ),
+                const SizedBox(height: 20.0),
+              ],
             ),
           ),
         ),
