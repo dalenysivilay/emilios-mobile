@@ -5,6 +5,7 @@ import 'package:emilios_market/widgets/rounded_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -95,24 +96,34 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: SafeArea(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            reverse: true,
             child: Column(
               children: [
-                const SizedBox(height: 20.0),
-                Image.asset(
-                  'assets/images/emilio-grocery-logo.png',
+                const SizedBox(height: 14.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 12.0,
+                  ),
+                  child: Image.asset(
+                    'assets/images/emilio-grocery-logo.png',
+                  ),
                 ),
                 Column(
                   children: [
-                    const SizedBox(height: 90.0),
+                    const SizedBox(height: 50.0),
                     Text(
-                      "LOGIN",
-                      style: h1,
+                      "Welcome!",
+                      style: GoogleFonts.mitr(
+                        textStyle: h1,
+                      ),
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 10.0),
                     RoundedInputField(
                       hintText: "Email...",
+                      icon: Icons.email,
                       onChanged: (value) {
                         _loginEmail = value;
                       },
@@ -122,6 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     RoundedInputField(
                       hintText: "Password...",
+                      icon: Icons.lock,
+                      suffIcon: Icons.visibility,
                       onChanged: (value) {
                         _loginPassword = value;
                       },
@@ -131,6 +144,22 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       textInputAction: TextInputAction.done,
                     ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: 24.0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Text(
+                          "Forgot your password?",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10.0),
                     RoundedButton(
                       text: "Login",
                       onPressed: () {
@@ -141,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ),
-                const SizedBox(height: 90.0),
+                const SizedBox(height: 50.0),
                 RoundedButton(
                   text: "Create New Account",
                   onPressed: () {
@@ -154,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   outlineBtn: true,
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 14.0),
               ],
             ),
           ),

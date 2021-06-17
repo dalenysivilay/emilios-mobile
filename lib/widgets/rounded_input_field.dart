@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
+  final IconData icon;
+  final IconData suffIcon;
   final Function(String) onChanged;
   final Function(String) onSubmitted;
   final TextInputAction textInputAction;
   final bool isPasswordField;
   RoundedInputField({
     this.hintText,
+    this.icon,
+    this.suffIcon,
     this.onChanged,
     this.onSubmitted,
     this.textInputAction,
@@ -36,6 +40,14 @@ class RoundedInputField extends StatelessWidget {
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText ?? "Hint Text...",
+            prefixIcon: Icon(
+              icon,
+              color: kPrimaryColor,
+            ),
+            suffixIcon: Icon(
+              suffIcon,
+              color: kPrimaryColor,
+            ),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 24.0,
               vertical: 20.0,

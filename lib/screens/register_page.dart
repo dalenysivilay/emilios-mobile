@@ -97,24 +97,34 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: SafeArea(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            reverse: true,
             child: Column(
               children: [
-                const SizedBox(height: 20.0),
-                Image.asset(
-                  'assets/images/emilio-grocery-logo.png',
+                const SizedBox(height: 14.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 12.0,
+                  ),
+                  child: Image.asset(
+                    'assets/images/emilio-grocery-logo.png',
+                  ),
                 ),
                 Column(
                   children: [
-                    const SizedBox(height: 90.0),
+                    const SizedBox(height: 60.0),
                     Text(
-                      "REGISTER",
-                      style: h1,
+                      "Create New Account",
+                      style: GoogleFonts.mitr(
+                        textStyle: h1,
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     RoundedInputField(
                       hintText: "Email...",
+                      icon: Icons.email,
                       onChanged: (value) {
                         _registerEmail = value;
                       },
@@ -124,6 +134,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     RoundedInputField(
                       hintText: "Password...",
+                      icon: Icons.lock,
+                      suffIcon: Icons.visibility,
                       onChanged: (value) {
                         _registerPassword = value;
                       },
@@ -134,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       textInputAction: TextInputAction.done,
                     ),
                     RoundedButton(
-                      text: "Create Account",
+                      text: "Register",
                       onPressed: () {
                         _submitForm();
                       },
@@ -143,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     )
                   ],
                 ),
-                const SizedBox(height: 90.0),
+                const SizedBox(height: 60.0),
                 RoundedButton(
                   text: "Back to Login",
                   onPressed: () {
@@ -156,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   outlineBtn: true,
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 14.0),
               ],
             ),
           ),
