@@ -26,7 +26,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             actions: [
               TextButton(
-                child: Text("Close Dialog"),
+                child: Text(
+                  "Close Dialog",
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                  ),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },

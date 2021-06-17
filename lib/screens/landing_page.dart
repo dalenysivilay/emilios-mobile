@@ -1,5 +1,5 @@
-import 'package:emilios_market/screens/home_page.dart';
 import 'package:emilios_market/screens/login_page.dart';
+import 'package:emilios_market/widgets/bottom_nav.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class LandingPage extends StatelessWidget {
                   return LoginPage();
                   //User is logged in
                 } else {
-                  return HomePage();
+                  return BottomNav();
                 }
               }
               // Checking the auth state - Loading

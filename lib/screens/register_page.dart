@@ -25,7 +25,12 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             actions: [
               TextButton(
-                child: Text("Close Dialog"),
+                child: Text(
+                  "Close Dialog",
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                  ),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -114,14 +119,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Column(
                   children: [
-                    const SizedBox(height: 60.0),
+                    const SizedBox(height: 50.0),
                     Text(
-                      "Create New Account",
+                      "Create Account",
                       style: GoogleFonts.mitr(
                         textStyle: h1,
                       ),
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 10.0),
                     RoundedInputField(
                       hintText: "Email...",
                       icon: Icons.email,
@@ -155,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     )
                   ],
                 ),
-                const SizedBox(height: 60.0),
+                const SizedBox(height: 50.0),
                 RoundedButton(
                   text: "Back to Login",
                   onPressed: () {
