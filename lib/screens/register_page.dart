@@ -1,7 +1,6 @@
 import 'package:emilios_market/screens/login_page.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/widgets/rounded_input_field.dart';
-import 'package:emilios_market/widgets/rounded_password_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,74 +86,79 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/home-login-bg.png',
-              ),
-              fit: BoxFit.cover,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/home-login-bg.png',
             ),
+            fit: BoxFit.cover,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                  top: 24.0,
-                ),
-                child: Image.asset(
+        ),
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(height: 20.0),
+                Image.asset(
                   'assets/images/emilio-grocery-logo.png',
                 ),
-              ),
-              Column(
-                children: [
-                  RoundedInputField(
-                    hintText: "Email...",
-                    onChanged: (value) {
-                      _registerEmail = value;
-                    },
-                    onSubmitted: (value) {},
-                    textInputAction: TextInputAction.next,
-                    isPasswordField: false,
-                  ),
-                  RoundedInputField(
-                    hintText: "Password...",
-                    onChanged: (value) {
-                      _registerPassword = value;
-                    },
-                    isPasswordField: true,
-                    onSubmitted: (value) {
-                      _submitForm();
-                    },
-                    textInputAction: TextInputAction.done,
-                  ),
-                  RoundedButton(
-                    text: "Create New Account",
-                    onPressed: () {
-                      _submitForm();
-                    },
-                    isLoading: _registerFormLoading,
-                    outlineBtn: false,
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 16.0,
+                Column(
+                  children: [
+                    const SizedBox(height: 90.0),
+                    Text(
+                      "REGISTER",
+                      style: h1,
+                    ),
+                    const SizedBox(height: 20.0),
+                    RoundedInputField(
+                      hintText: "Email...",
+                      onChanged: (value) {
+                        _registerEmail = value;
+                      },
+                      onSubmitted: (value) {},
+                      textInputAction: TextInputAction.next,
+                      isPasswordField: false,
+                    ),
+                    RoundedInputField(
+                      hintText: "Password...",
+                      onChanged: (value) {
+                        _registerPassword = value;
+                      },
+                      isPasswordField: true,
+                      onSubmitted: (value) {
+                        _submitForm();
+                      },
+                      textInputAction: TextInputAction.done,
+                    ),
+                    RoundedButton(
+                      text: "Create Account",
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      isLoading: _registerFormLoading,
+                      outlineBtn: false,
+                    )
+                  ],
                 ),
-                child: RoundedButton(
-                  text: "Back To Login",
+                const SizedBox(height: 90.0),
+                RoundedButton(
+                  text: "Back to Login",
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return LoginPage();
+                      }),
+                    );
                   },
-                  isLoading: _registerFormLoading,
                   outlineBtn: true,
                 ),
-              ),
-            ],
+                const SizedBox(height: 20.0),
+              ],
+            ),
           ),
         ),
       ),
