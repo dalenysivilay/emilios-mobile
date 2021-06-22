@@ -1,19 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emilios_market/constants.dart';
+import 'package:emilios_market/models/product_model.dart';
+import 'package:emilios_market/providers/product_provider.dart';
+import 'package:emilios_market/widgets/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class MenuPage extends StatefulWidget {
-  const MenuPage({Key key}) : super(key: key);
-
-  @override
-  _MenuPageState createState() => _MenuPageState();
-}
-
-class _MenuPageState extends State<MenuPage> {
+class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<Product> productsList = productProvider.products;
+
     return Scaffold(
-      body: Center(
-        child: Text("Menu", style: GoogleFonts.mitr()),
+      appBar: new AppBar(
+        title: Text("Menu"),
+        centerTitle: true,
+        backgroundColor: kPrimaryColor,
+      ),
+      body: ListView.builder(
+        itemCount: productsList.length,
+        itemBuilder: (context, index) {
+          return ChangeNotifierProvider.value(
+            value: productsList[index],
+            child: MenuProducts(),
+          );
+        },
       ),
     );
   }
