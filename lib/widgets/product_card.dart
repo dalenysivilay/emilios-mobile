@@ -17,7 +17,7 @@ class _MenuProductsState extends State<MenuProducts> {
       onTap: () => Navigator.pushNamed(context, ProductPage.routeName),
       child: Container(
         width: size.width,
-        height: 120.0,
+        height: 130.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(
@@ -40,15 +40,15 @@ class _MenuProductsState extends State<MenuProducts> {
               children: [
                 Container(
                   width: 120.0,
-                  height: 120.0,
+                  height: 130.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10.0),
                       bottomLeft: Radius.circular(10.0),
                     ),
                     image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage("assets/images/sample-food.jpg"),
+                      fit: BoxFit.cover,
+                      image: NetworkImage(productAtt.images),
                     ),
                   ),
                 ),
@@ -76,7 +76,6 @@ class _MenuProductsState extends State<MenuProducts> {
                               ),
                             ),
                           ),
-                          Spacer(),
                           Text(
                             "\$ ${productAtt.price}",
                             textAlign: TextAlign.right,
@@ -95,7 +94,7 @@ class _MenuProductsState extends State<MenuProducts> {
                           Flexible(
                             child: Text(
                               productAtt.desc,
-                              maxLines: 3,
+                              maxLines: 4,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
