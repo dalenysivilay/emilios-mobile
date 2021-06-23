@@ -4,6 +4,7 @@ import 'package:emilios_market/models/cart_model.dart';
 import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/screens/cart_page/cart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ActionBar extends StatelessWidget {
@@ -75,19 +76,11 @@ class ActionBar extends StatelessWidget {
           if (_hasTitle)
             Text(
               title ?? "Action Bar",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18.0,
-              ),
+              style: GoogleFonts.libreFranklin(textStyle: h1),
             ),
-          GestureDetector(
+          InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartPage(),
-                ),
-              );
+              Navigator.pushNamed(context, CartPage.routeName);
             },
             child: Container(
                 width: 42.0,

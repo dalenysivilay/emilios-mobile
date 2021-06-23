@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'components/personal_page.dart';
+
 class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,14 @@ class AccountPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    accListTile("Personal Information", () {}, context),
-                    accListTile("Payment Method", () {}, context),
+                    accListTile("Personal", () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PersonalPage(),
+                          ));
+                    }, context),
+                    accListTile("Payment Methods", () {}, context),
                     accListTile("Help", () {}, context),
                     accListTile("Notifications", () {}, context),
                     accListTile("Sign Out", () {
@@ -34,7 +42,7 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             ActionBar(
-              title: "Account Settings",
+              title: "Settings",
               hasBackArrow: false,
             )
           ],

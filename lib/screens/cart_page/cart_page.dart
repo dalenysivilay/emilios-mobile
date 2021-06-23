@@ -3,12 +3,15 @@ import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/screens/cart_page/components/cart_empty.dart';
 import 'package:emilios_market/screens/cart_page/components/cart_full.dart';
 import 'package:emilios_market/widgets/action_bar.dart';
+import 'package:emilios_market/widgets/bottom_nav.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/services/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
+  static const routeName = '/CartPage';
+
   @override
   _CartPageState createState() => _CartPageState();
 }
@@ -35,20 +38,20 @@ class _CartPageState extends State<CartPage> {
     final cartProvider = Provider.of<CartProvider>(context);
     return cartProvider.getCartItems.isEmpty
         ? SafeArea(
-            child: Stack(
-              children: [
-                Scaffold(
-                  body: CartEmpty(),
-                ),
-                ActionBar(title: "YOUR BAG"),
-              ],
+            child: Scaffold(
+              body: Stack(
+                children: [
+                  CartEmpty(),
+                  ActionBar(title: "Cart"),
+                ],
+              ),
             ),
           )
         : SafeArea(
-            child: Stack(
-              children: [
-                Scaffold(
-                  body: ListView.builder(
+            child: Scaffold(
+              body: Stack(
+                children: [
+                  ListView.builder(
                     padding: EdgeInsets.only(top: 100.0, bottom: 0),
                     itemCount: cartProvider.getCartItems.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -61,14 +64,14 @@ class _CartPageState extends State<CartPage> {
                       );
                     },
                   ),
-                ),
-                checkoutSection(context, cartProvider.subtotalAmount,
-                    cartProvider.taxAmount, cartProvider.totalAmount),
-                ActionBar(
-                  title: "YOUR BAG",
-                  hasBackArrow: false,
-                ),
-              ],
+                  checkoutSection(context, cartProvider.subtotalAmount,
+                      cartProvider.taxAmount, cartProvider.totalAmount),
+                  ActionBar(
+                    title: "Cart",
+                    hasBackArrow: false,
+                  ),
+                ],
+              ),
             ),
           );
   }
@@ -83,7 +86,17 @@ class _CartPageState extends State<CartPage> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          color: Colors.white,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 0.5),
+              ),
+            ],
+          ),
           child: Column(
             children: [
               //Totals Row
@@ -150,20 +163,18 @@ class _CartPageState extends State<CartPage> {
                     ),
                     SizedBox(height: 5.0),
                     //Continue to Payment Button
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RoundedButton(
-                          text: "Continue to Payment",
-                          onPressed: () {
-                            double amountInCents = totalAmount * 1000;
-                            int integerAmount = (amountInCents / 10).ceil();
-                            payWithCard(amount: integerAmount);
-                          },
-                        ),
-                      ],
-                    ),
                   ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 24.0),
+                child: RoundedButton(
+                  text: "Continue to Payment",
+                  onPressed: () {
+                    double amountInCents = totalAmount * 1000;
+                    int integerAmount = (amountInCents / 10).ceil();
+                    payWithCard(amount: integerAmount);
+                  },
                 ),
               ),
             ],

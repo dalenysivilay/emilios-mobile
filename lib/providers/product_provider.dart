@@ -4,9 +4,17 @@ import 'package:flutter/cupertino.dart';
 
 class ProductProvider with ChangeNotifier {
   List<Product> _products = [];
+  Product _currentProduct;
 
   List<Product> get products {
     return _products;
+  }
+
+  Product get currentProduct => _currentProduct;
+
+  set currentProduct(Product product) {
+    _currentProduct = product;
+    notifyListeners();
   }
 
   Product findById(String productId) {
@@ -26,6 +34,7 @@ class ProductProvider with ChangeNotifier {
             id: element.get('id'),
             name: element.get('name'),
             desc: element.get('desc'),
+            meats: element.get('meats'),
             images: element.get('images'),
             price: element.get('price'),
           ),

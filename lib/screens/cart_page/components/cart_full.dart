@@ -113,7 +113,7 @@ class _CartFullState extends State<CartFull> {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    "Type of Meat",
+                                    cartProvider.meats,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -147,8 +147,9 @@ class _CartFullState extends State<CartFull> {
                                             : () {
                                                 cartAttr.reduceItemByOne(
                                                     widget.productId,
-                                                    cartProvider.price,
                                                     cartProvider.name,
+                                                    cartProvider.meats,
+                                                    cartProvider.price,
                                                     cartProvider.images);
                                               },
                                         child: Container(
@@ -188,6 +189,7 @@ class _CartFullState extends State<CartFull> {
                                           cartAttr.addProductToCart(
                                               widget.productId,
                                               cartProvider.name,
+                                              cartProvider.meats,
                                               cartProvider.price,
                                               cartProvider.images);
                                         },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:emilios_market/screens/home_page.dart';
 import 'package:emilios_market/screens/menu_page.dart';
 import 'package:emilios_market/screens/cart_page/cart_page.dart';
-import 'package:emilios_market/screens/account_page.dart';
+import 'package:emilios_market/screens/account_page/account_page.dart';
 
 class BottomNav extends StatefulWidget {
   @override

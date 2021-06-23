@@ -1,5 +1,7 @@
+import 'package:emilios_market/constants.dart';
 import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/providers/product_provider.dart';
+import 'package:emilios_market/screens/cart_page/cart_page.dart';
 import 'package:emilios_market/screens/landing_page.dart';
 import 'package:emilios_market/screens/product_page.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
       routes: {
         //   '/': (ctx) => LandingPage(),
         ProductPage.routeName: (ctx) => ProductPage(),
+        CartPage.routeName: (ctx) => CartPage(),
       },
     );
   }

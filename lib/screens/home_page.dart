@@ -19,15 +19,27 @@ class _HomePageState extends State<HomePage> {
     final productProvider = Provider.of<ProductProvider>(context);
     productProvider.fetchProducts();
     return SafeArea(
-      child: Stack(
-        children: [
-          Scaffold(
-            body: Center(
-              child: Text("Homepage"),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Scaffold(
+              body: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/images/home-login-bg.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
-          ActionBar(),
-        ],
+            ActionBar(
+              title: "Welcome",
+            ),
+          ],
+        ),
       ),
     );
   }

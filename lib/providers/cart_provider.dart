@@ -30,14 +30,30 @@ class CartProvider with ChangeNotifier {
     return totalAmount;
   }
 
-  void addProductToCart(
-      String productId, String name, double price, String images) {
+  void selectMeat(String productId, String name, String meats, double price,
+      String images) {
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
           (existingCartItem) => CartModel(
                 id: existingCartItem.id,
                 name: existingCartItem.name,
+                meats: existingCartItem.meats,
+                price: existingCartItem.price,
+              ));
+    }
+    notifyListeners();
+  }
+
+  void addProductToCart(String productId, String name, String meats,
+      double price, String images) {
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (existingCartItem) => CartModel(
+                id: existingCartItem.id,
+                name: existingCartItem.name,
+                meats: existingCartItem.meats,
                 price: existingCartItem.price,
                 quantity: existingCartItem.quantity + 1,
                 images: existingCartItem.images,
@@ -48,6 +64,7 @@ class CartProvider with ChangeNotifier {
           () => CartModel(
                 id: DateTime.now().toString(),
                 name: name,
+                meats: meats,
                 price: price,
                 quantity: 1,
                 images: images,
@@ -56,17 +73,18 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void reduceItemByOne(
-      String productId, double price, String title, String imageUrl) {
+  void reduceItemByOne(String productId, String name, String meats,
+      double price, String images) {
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
-          (exitingCartItem) => CartModel(
-              id: exitingCartItem.id,
-              name: exitingCartItem.name,
-              price: exitingCartItem.price,
-              quantity: exitingCartItem.quantity - 1,
-              images: exitingCartItem.images));
+          (existingCartItem) => CartModel(
+              id: existingCartItem.id,
+              name: existingCartItem.name,
+              meats: existingCartItem.meats,
+              price: existingCartItem.price,
+              quantity: existingCartItem.quantity - 1,
+              images: existingCartItem.images));
     }
     notifyListeners();
   }
