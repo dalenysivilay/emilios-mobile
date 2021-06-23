@@ -20,7 +20,7 @@ class CartProvider with ChangeNotifier {
 
   double get taxAmount {
     var taxes = 0.0;
-    taxes = subtotalAmount * 0.07;
+    taxes = subtotalAmount * 0.0925;
     return taxes;
   }
 

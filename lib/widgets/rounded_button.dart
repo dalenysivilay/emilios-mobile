@@ -13,7 +13,7 @@ class RoundedButton extends StatelessWidget {
     bool _outlineBtn = outlineBtn ?? false;
     bool _isLoading = isLoading ?? false;
 
-    return GestureDetector(
+    return InkWell(
       onTap: onPressed,
       child: Container(
         height: 65.0,

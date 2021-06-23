@@ -4,10 +4,32 @@ import 'package:emilios_market/screens/cart_page/components/cart_empty.dart';
 import 'package:emilios_market/screens/cart_page/components/cart_full.dart';
 import 'package:emilios_market/widgets/action_bar.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
+import 'package:emilios_market/services/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    super.initState();
+    StripeService.init();
+  }
+
+  void payWithCard({int amount}) async {
+    CircularProgressIndicator();
+    var response = await StripeService.payWithNewCard(
+        currency: 'USD', amount: amount.toString());
+    Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(response.message),
+        duration:
+            Duration(milliseconds: response.success == true ? 1200 : 3000)));
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
@@ -18,7 +40,7 @@ class CartPage extends StatelessWidget {
                 Scaffold(
                   body: CartEmpty(),
                 ),
-                ActionBar(),
+                ActionBar(title: "YOUR BAG"),
               ],
             ),
           )
@@ -133,7 +155,11 @@ class CartPage extends StatelessWidget {
                       children: [
                         RoundedButton(
                           text: "Continue to Payment",
-                          onPressed: () {},
+                          onPressed: () {
+                            double amountInCents = totalAmount * 1000;
+                            int integerAmount = (amountInCents / 10).ceil();
+                            payWithCard(amount: integerAmount);
+                          },
                         ),
                       ],
                     ),

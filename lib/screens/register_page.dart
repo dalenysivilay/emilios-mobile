@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emilios_market/screens/login_page.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:emilios_market/widgets/rounded_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants.dart';
 
@@ -12,6 +14,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   // Build an alert dialog to display some errors.
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
@@ -42,9 +45,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // Create a new user account
   Future<String> _createAccount() async {
+    //Current date for user registration
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formattedDate = "${dateParse.month}-${dateParse.day}-${dateParse.year}";
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _registerEmail, password: _registerPassword);
+      await _auth.createUserWithEmailAndPassword(
+          email: _registerEmail.toLowerCase().trim(),
+          password: _registerPassword.trim());
+      final User user = _auth.currentUser;
+      final _uid = user.uid;
+      FirebaseFirestore.instance.collection('users').doc(_uid).set({
+        'id': _uid,
+        'name': _fullName,
+        'email': _registerEmail,
+        'phoneNumber': _phoneNumber,
+        'joinedAt': formattedDate,
+        'createdAt': Timestamp.now(),
+      });
       return null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -87,6 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
   // Form Input Field Values
   String _registerEmail = "";
   String _registerPassword = "";
+  String _fullName = "";
+  int _phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -128,11 +148,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 10.0),
                     RoundedInputField(
+                      hintText: "Name...",
+                      icon: Icons.person,
+                      onChanged: (value) {
+                        _fullName = value;
+                      },
+                      onSubmitted: (value) {},
+                      textInputAction: TextInputAction.next,
+                      isPasswordField: false,
+                    ),
+                    RoundedInputField(
+                      hintText: "Phone Number...",
+                      icon: Icons.phone,
+                      onChanged: (value) {
+                        _phoneNumber = int.parse(value);
+                      },
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: TextInputType.phone,
+                      onSubmitted: (value) {},
+                      textInputAction: TextInputAction.next,
+                      isPasswordField: false,
+                    ),
+                    RoundedInputField(
                       hintText: "Email...",
                       icon: Icons.email,
                       onChanged: (value) {
                         _registerEmail = value;
                       },
+                      keyboardType: TextInputType.emailAddress,
                       onSubmitted: (value) {},
                       textInputAction: TextInputAction.next,
                       isPasswordField: false,

@@ -6,6 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future<void> _signOut() async {
+      await FirebaseAuth.instance.signOut();
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -22,7 +26,9 @@ class AccountPage extends StatelessWidget {
                     accListTile("Payment Method", () {}, context),
                     accListTile("Help", () {}, context),
                     accListTile("Notifications", () {}, context),
-                    accListTile("Sign Out", () {}, context),
+                    accListTile("Sign Out", () {
+                      _signOut();
+                    }, context),
                   ],
                 ),
               ),

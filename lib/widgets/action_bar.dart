@@ -32,12 +32,22 @@ class ActionBar extends StatelessWidget {
     bool _hasTitle = hasTitle ?? true;
 
     return Container(
-      color: Colors.white,
       padding: EdgeInsets.only(
         top: 24.0,
         left: 24.0,
         right: 24.0,
         bottom: 24.0,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: Offset(0, 0.5),
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +97,12 @@ class ActionBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 alignment: Alignment.center,
-                child: Text("$itemAmount")
+                child: Text(
+                  "$itemAmount",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )
                 /* StreamBuilder(
                 // stream: _usersRef.doc(_firebaseServices.getUserId()).collection("Cart").snapshots(),
                 builder: (context, snapshot) {

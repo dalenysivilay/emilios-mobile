@@ -45,7 +45,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<String> _loginAccount() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _loginEmail, password: _loginPassword);
+          email: _loginEmail.toLowerCase().trim(),
+          password: _loginPassword.trim());
       return null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

@@ -1,5 +1,6 @@
 import 'package:emilios_market/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
@@ -9,6 +10,8 @@ class RoundedInputField extends StatelessWidget {
   final Function(String) onSubmitted;
   final TextInputAction textInputAction;
   final bool isPasswordField;
+  TextInputType keyboardType;
+  List<TextInputFormatter> inputFormatters;
   RoundedInputField({
     this.hintText,
     this.icon,
@@ -17,6 +20,8 @@ class RoundedInputField extends StatelessWidget {
     this.onSubmitted,
     this.textInputAction,
     this.isPasswordField,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -31,7 +36,7 @@ class RoundedInputField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Color(0xFFF2F2F2), borderRadius: BorderRadius.circular(12.0)),
       child: TextField(
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: keyboardType,
         cursorColor: kPrimaryColor,
         obscureText: _isPasswordField,
         onChanged: onChanged,
