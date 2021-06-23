@@ -9,6 +9,10 @@ class ProductProvider with ChangeNotifier {
     return _products;
   }
 
+  Product findById(String productId) {
+    return _products.firstWhere((element) => element.id == productId);
+  }
+
   Future<void> fetchProducts() async {
     await FirebaseFirestore.instance
         .collection('products')
@@ -19,6 +23,7 @@ class ProductProvider with ChangeNotifier {
         _products.insert(
           0,
           Product(
+            id: element.get('id'),
             name: element.get('name'),
             desc: element.get('desc'),
             images: element.get('images'),
@@ -28,17 +33,4 @@ class ProductProvider with ChangeNotifier {
       }).toList();
     });
   }
-/*
-List<Product> _products = [
-    Product(
-      name: "Taco",
-      meats: "Al Pastor",
-      price: 1.89,
-      desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam purus.",
-      images:
-          "https://firebasestorage.googleapis.com/v0/b/emilios-market.appspot.com/o/photo-1514843319620-4f042827c481.jfif?alt=media&token=f723e50d-7528-4ddb-9d54-65d05c66d0cb",
-    ),
-  ];
- */
 }

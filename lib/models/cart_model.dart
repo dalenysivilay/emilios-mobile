@@ -4,7 +4,7 @@ class CartModel with ChangeNotifier {
   final String id;
   final String name;
   final int quantity;
-  double price;
+  final double price;
   final String images;
 
   CartModel({

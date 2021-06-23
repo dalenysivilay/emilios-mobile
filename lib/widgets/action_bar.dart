@@ -1,0 +1,117 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emilios_market/constants.dart';
+import 'package:emilios_market/models/cart_model.dart';
+import 'package:emilios_market/providers/cart_provider.dart';
+import 'package:emilios_market/screens/cart_page/cart_page.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class ActionBar extends StatelessWidget {
+  final String title;
+  final bool hasBackArrow;
+  final bool hasTitle;
+
+  ActionBar({
+    this.title,
+    this.hasBackArrow,
+    this.hasTitle,
+  });
+
+  //FirebaseServices _firebaseServices = FirebaseServices();
+
+  final CollectionReference _usersRef =
+      FirebaseFirestore.instance.collection("Users");
+
+  @override
+  Widget build(BuildContext context) {
+    final cartProvide = Provider.of<CartProvider>(context);
+
+    int itemAmount = cartProvide.getCartItems.length;
+
+    bool _hasBackArrow = hasBackArrow ?? false;
+    bool _hasTitle = hasTitle ?? true;
+
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.only(
+        top: 24.0,
+        left: 24.0,
+        right: 24.0,
+        bottom: 24.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (_hasBackArrow)
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 42.0,
+                height: 42.0,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.white,
+                  size: 16.0,
+                ),
+              ),
+            ),
+          if (_hasTitle)
+            Text(
+              title ?? "Action Bar",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),
+            ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartPage(),
+                ),
+              );
+            },
+            child: Container(
+                width: 42.0,
+                height: 42.0,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                alignment: Alignment.center,
+                child: Text("$itemAmount")
+                /* StreamBuilder(
+                // stream: _usersRef.doc(_firebaseServices.getUserId()).collection("Cart").snapshots(),
+                builder: (context, snapshot) {
+                  int _totalItems = 0;
+
+                  if (snapshot.connectionState == ConnectionState.active) {
+                    List _documents = snapshot.data.docs;
+                    _totalItems = _documents.length;
+                  }
+
+                  return Text(
+                    "$_totalItems" ?? "0",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  );
+                },
+              ), */
+                ),
+          )
+        ],
+      ),
+    );
+  }
+}

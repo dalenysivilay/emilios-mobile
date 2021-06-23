@@ -14,7 +14,9 @@ class _MenuProductsState extends State<MenuProducts> {
     Size size = MediaQuery.of(context).size;
     final productAtt = Provider.of<Product>(context);
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, ProductPage.routeName),
+      onTap: () => Navigator.pushNamed(context, ProductPage.routeName,
+          arguments: productAtt.id),
+      //Product Card Size
       child: Container(
         width: size.width,
         height: 130.0,
@@ -77,7 +79,7 @@ class _MenuProductsState extends State<MenuProducts> {
                             ),
                           ),
                           Text(
-                            "\$ ${productAtt.price}",
+                            "\$ ${productAtt.price.toStringAsFixed(2)}",
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

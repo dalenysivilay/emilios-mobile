@@ -6,44 +6,47 @@ class CartEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "YOUR CART IS EMPTY. ",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
+    return Container(
+      margin: EdgeInsets.only(top: 96.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "YOUR CART IS EMPTY. ",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          Text(
-            "Add items to your cart.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
+            Text(
+              "Add items to your cart.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.normal,
+              ),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.05,
-          ),
-          SvgPicture.asset(
-            "assets/icons/waitress-empty-cart.svg",
-            height: size.height * 0.3,
-            width: double.infinity,
-            alignment: Alignment.center,
-          ),
-          SizedBox(
-            height: size.height * 0.05,
-          ),
-          RoundedButton(
-            text: "See Menu",
-            onPressed: () {},
-          ),
-        ],
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            SvgPicture.asset(
+              "assets/icons/waitress-empty-cart.svg",
+              height: size.height * 0.3,
+              width: double.infinity,
+              alignment: Alignment.center,
+            ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            RoundedButton(
+              text: "See Menu",
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

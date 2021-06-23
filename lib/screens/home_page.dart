@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emilios_market/constants.dart';
 import 'package:emilios_market/models/product_model.dart';
 import 'package:emilios_market/providers/product_provider.dart';
 import 'package:emilios_market/screens/product_page.dart';
+import 'package:emilios_market/widgets/action_bar.dart';
+import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,109 +16,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final productProvider = Provider.of<ProductProvider>(context);
     productProvider.fetchProducts();
     return SafeArea(
-      child: InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductPage.routeName),
-        child: Container(
-          width: size.width,
-          height: 120.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
+      child: Stack(
+        children: [
+          Scaffold(
+            body: Center(
+              child: Text("Homepage"),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 3,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
           ),
-          margin: EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
-          child: Row(
-            children: [
-              //Left Side of Product Card
-              Column(
-                children: [
-                  Container(
-                    width: 120.0,
-                    height: 120.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        bottomLeft: Radius.circular(10.0),
-                      ),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage("assets/images/sample-food.jpg"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              //Right Side of Product Card
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 14.0),
-                  child: Column(
-                    children: [
-                      //Food Name and Food Price Row
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                "Food Name",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "\$ 1.89",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      //Food Description Row
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 14.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                "Food Description Goes Here",
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+          ActionBar(),
+        ],
       ),
     );
   }

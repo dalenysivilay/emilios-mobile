@@ -1,5 +1,8 @@
+import 'package:emilios_market/providers/cart_provider.dart';
+import 'package:emilios_market/providers/product_provider.dart';
+import 'package:emilios_market/widgets/action_bar.dart';
+import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:emilios_market/models/product_model.dart';
 import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {
@@ -12,49 +15,42 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final productsData = Provider.of<ProductProvider>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context);
+    final productId = ModalRoute.of(context).settings.arguments as String;
+    final prodAttr = productsData.findById(productId);
+    final productsList = productsData.products;
+    print("productId: $productId");
     return Scaffold(
-        appBar: new AppBar(
-          title: Text("Product Page"),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: <Widget>[
-            Container(
-              width: size.width,
-              height: size.height * 0.25,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/sample-food.jpg'),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 6,
-                    offset: Offset(0, 3),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(prodAttr.id),
+                  Text(prodAttr.name),
+                  Text(prodAttr.desc),
+                  Text("\$ ${prodAttr.price}"),
+                  RoundedButton(
+                    text: "Add to Cart",
+                    onPressed: () {
+                      cartProvider.addProductToCart(productId, prodAttr.name,
+                          prodAttr.price, prodAttr.images);
+                    },
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Description",
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Description",
-                textAlign: TextAlign.justify,
-              ),
+            ActionBar(
+              title: prodAttr.name,
+              hasBackArrow: true,
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

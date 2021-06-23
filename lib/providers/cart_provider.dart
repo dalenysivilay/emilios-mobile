@@ -8,7 +8,7 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
-  double get totalAmount {
+  double get subtotalAmount {
     var total = 0.0;
     _cartItems.forEach(
       (key, value) {
@@ -16,6 +16,18 @@ class CartProvider with ChangeNotifier {
       },
     );
     return total;
+  }
+
+  double get taxAmount {
+    var taxes = 0.0;
+    taxes = subtotalAmount * 0.07;
+    return taxes;
+  }
+
+  double get totalAmount {
+    var totalAmount = 0.0;
+    totalAmount = subtotalAmount + taxAmount;
+    return totalAmount;
   }
 
   void addProductToCart(
@@ -27,7 +39,7 @@ class CartProvider with ChangeNotifier {
                 id: existingCartItem.id,
                 name: existingCartItem.name,
                 price: existingCartItem.price,
-                quantity: existingCartItem.quantity,
+                quantity: existingCartItem.quantity + 1,
                 images: existingCartItem.images,
               ));
     } else {
@@ -41,6 +53,31 @@ class CartProvider with ChangeNotifier {
                 images: images,
               ));
     }
+    notifyListeners();
+  }
+
+  void reduceItemByOne(
+      String productId, double price, String title, String imageUrl) {
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (exitingCartItem) => CartModel(
+              id: exitingCartItem.id,
+              name: exitingCartItem.name,
+              price: exitingCartItem.price,
+              quantity: exitingCartItem.quantity - 1,
+              images: exitingCartItem.images));
+    }
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cartItems.clear();
     notifyListeners();
   }
 }
