@@ -33,6 +33,28 @@ class _HomePageState extends State<HomePage> {
                     fit: BoxFit.cover,
                   ),
                 ),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 12.0,
+                        ),
+                        child: Image.asset(
+                          'assets/images/emilio-grocery-logo.png',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 100.0,
+                      ),
+                      RoundedButton(
+                        text: "See Menu",
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
             ActionBar(

@@ -46,11 +46,7 @@ class CartEmpty extends StatelessWidget {
               child: RoundedButton(
                 text: "See Menu",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MenuPage(),
-                      ));
+                  Navigator.pushNamed(context, MenuPage.routeName);
                 },
               ),
             ),

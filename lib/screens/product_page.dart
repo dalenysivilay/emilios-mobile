@@ -56,8 +56,11 @@ class _ProductPageState extends State<ProductPage> {
                     style: TextStyle(),
                   ),
                 ),
-                Text("\$ ${prodAttr.price}"),
-                Text("Select Meat"),
+                Text(
+                  "\$ ${prodAttr.price}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21.0),
+                ),
+
                 //DROPDOWN MENU
                 Container(
                   padding: const EdgeInsets.all(0.0),
@@ -99,14 +102,14 @@ class _ProductPageState extends State<ProductPage> {
                         if (_chosenValue == 'Shrimp (+\$1.50)') {
                           subtotal = prodAttr.price + 1.50;
                         } else {
-                          subtotal = 0.0;
+                          subtotal = prodAttr.price;
                         }
                         return subtotal;
                       });
                     },
                   ),
                 ),
-                Text("Subtotal"),
+
                 RoundedButton(
                   text: "Add to Cart",
                   onPressed: cartProvider.getCartItems.containsKey(productId)

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
+  static const routeName = '/MenuPage';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

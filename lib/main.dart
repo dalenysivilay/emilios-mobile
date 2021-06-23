@@ -3,6 +3,7 @@ import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/providers/product_provider.dart';
 import 'package:emilios_market/screens/cart_page/cart_page.dart';
 import 'package:emilios_market/screens/landing_page.dart';
+import 'package:emilios_market/screens/menu_page.dart';
 import 'package:emilios_market/screens/product_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         //   '/': (ctx) => LandingPage(),
         ProductPage.routeName: (ctx) => ProductPage(),
         CartPage.routeName: (ctx) => CartPage(),
+        MenuPage.routeName: (ctx) => MenuPage(),
       },
     );
   }

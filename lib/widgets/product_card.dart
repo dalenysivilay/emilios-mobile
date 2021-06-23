@@ -96,7 +96,7 @@ class _MenuProductsState extends State<MenuProducts> {
                           Flexible(
                             child: Text(
                               productAtt.desc,
-                              maxLines: 4,
+                              maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
