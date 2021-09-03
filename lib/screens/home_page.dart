@@ -18,50 +18,48 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
     productProvider.fetchProducts();
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Scaffold(
-              body: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/images/home-login-bg.png',
-                    ),
-                    fit: BoxFit.cover,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Scaffold(
+            body: Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/home-login-bg.png',
                   ),
+                  fit: BoxFit.cover,
                 ),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 12.0,
-                        ),
-                        child: Image.asset(
-                          'assets/images/emilio-grocery-logo.png',
-                        ),
+              ),
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 12.0,
                       ),
-                      SizedBox(
-                        height: 100.0,
+                      child: Image.asset(
+                        'assets/images/emilio-grocery-logo.png',
                       ),
-                      RoundedButton(
-                        text: "See Menu",
-                      )
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 100.0,
+                    ),
+                    RoundedButton(
+                      text: "View Location",
+                    )
+                  ],
                 ),
               ),
             ),
-            ActionBar(
-              title: "Welcome",
-            ),
-          ],
-        ),
+          ),
+          ActionBar(
+            title: "Welcome",
+          ),
+        ],
       ),
     );
   }

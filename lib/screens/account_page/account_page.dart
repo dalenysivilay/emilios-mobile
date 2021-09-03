@@ -13,11 +13,11 @@ class AccountPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
+      body: Container(
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 80.0),
+              margin: EdgeInsets.only(top: 140.0),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(

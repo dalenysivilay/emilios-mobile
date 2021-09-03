@@ -34,7 +34,7 @@ class ActionBar extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(
-        top: 24.0,
+        top: 56.0,
         left: 24.0,
         right: 24.0,
         bottom: 24.0,
@@ -94,6 +94,7 @@ class ActionBar extends StatelessWidget {
                   "$itemAmount",
                   style: TextStyle(
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 )
                 /* StreamBuilder(

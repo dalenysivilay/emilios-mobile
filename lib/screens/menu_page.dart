@@ -15,11 +15,11 @@ class MenuPage extends StatelessWidget {
     final productProvider = Provider.of<ProductProvider>(context);
     List<Product> productsList = productProvider.products;
 
-    return SafeArea(
+    return Container(
       child: Stack(
         children: [
           ListView.builder(
-            padding: EdgeInsets.only(top: 96.0),
+            padding: EdgeInsets.only(top: 140.0),
             itemCount: productsList.length,
             itemBuilder: (context, index) {
               return ChangeNotifierProvider.value(

@@ -4,7 +4,8 @@ class Product with ChangeNotifier {
   final String id;
   final String name;
   final String desc;
-  final String meats;
+  final List meats;
+  final bool hasChoice;
   final double price;
   final String images;
 
@@ -13,6 +14,7 @@ class Product with ChangeNotifier {
     this.name,
     this.desc,
     this.meats,
+    this.hasChoice,
     this.price,
     this.images,
   });

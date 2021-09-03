@@ -18,6 +18,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   String _chosenValue;
   double subtotal = 0.0;
+  double upCharge = 0.0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
     final prodAttr = productsData.findById(productId);
     final productsList = productsData.products;
     print("productId: $productId");
-    return SafeArea(
+    return Container(
       child: Scaffold(
         body: Stack(
           children: [
@@ -37,7 +38,7 @@ class _ProductPageState extends State<ProductPage> {
                 Container(
                   height: 200,
                   width: size.width,
-                  margin: EdgeInsets.only(top: 110.0, left: 24.0, right: 24.0),
+                  margin: EdgeInsets.only(top: 150.0, left: 24.0, right: 24.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                     image: DecorationImage(
@@ -53,12 +54,15 @@ class _ProductPageState extends State<ProductPage> {
                   child: Text(
                     prodAttr.desc,
                     textAlign: TextAlign.center,
-                    style: TextStyle(),
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
                   ),
                 ),
+                const SizedBox(height: 15.0),
                 Text(
-                  "\$ ${prodAttr.price}",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21.0),
+                  "\$ ${prodAttr.price + upCharge}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
                 ),
 
                 //DROPDOWN MENU
@@ -98,11 +102,14 @@ class _ProductPageState extends State<ProductPage> {
                         _chosenValue = value;
                         if (_chosenValue == 'Fish (+\$1.50)') {
                           subtotal = prodAttr.price + 1.50;
+                          upCharge = 1.50;
                         }
                         if (_chosenValue == 'Shrimp (+\$1.50)') {
                           subtotal = prodAttr.price + 1.50;
+                          upCharge = 1.50;
                         } else {
                           subtotal = prodAttr.price;
+                          upCharge = 0.0;
                         }
                         return subtotal;
                       });
@@ -110,6 +117,7 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
 
+                const SizedBox(height: 90.0),
                 RoundedButton(
                   text: "Add to Cart",
                   onPressed: cartProvider.getCartItems.containsKey(productId)

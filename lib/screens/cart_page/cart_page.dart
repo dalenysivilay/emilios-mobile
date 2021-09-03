@@ -37,7 +37,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     return cartProvider.getCartItems.isEmpty
-        ? SafeArea(
+        ? Container(
             child: Scaffold(
               body: Stack(
                 children: [
@@ -47,12 +47,12 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           )
-        : SafeArea(
+        : Container(
             child: Scaffold(
               body: Stack(
                 children: [
                   ListView.builder(
-                    padding: EdgeInsets.only(top: 100.0, bottom: 0),
+                    padding: EdgeInsets.only(top: 140.0, bottom: 0),
                     itemCount: cartProvider.getCartItems.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ChangeNotifierProvider.value(
@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                       cartProvider.taxAmount, cartProvider.totalAmount),
                   ActionBar(
                     title: "Cart",
-                    hasBackArrow: false,
+                    hasBackArrow: true,
                   ),
                 ],
               ),

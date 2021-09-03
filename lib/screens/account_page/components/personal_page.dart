@@ -41,11 +41,11 @@ class _PersonalPageState extends State<PersonalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Container(
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 80.0),
+              margin: EdgeInsets.only(top: 140.0),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(
