@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.white,
+        primarySwatch: Colors.red,
         textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),

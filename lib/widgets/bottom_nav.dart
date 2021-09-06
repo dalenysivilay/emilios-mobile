@@ -14,10 +14,9 @@ class _BottomNav extends State<BottomNav> {
   int _selectedPageIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
     MenuPage(),
-    CartPage(),
-    AccountPage(),
+    MenuPage(),
+    MenuPage(),
   ];
 
   void _selectPage(int index) {
@@ -49,10 +48,6 @@ class _BottomNav extends State<BottomNav> {
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               title: Text("Cart"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text("Account"),
             ),
           ],
         ));

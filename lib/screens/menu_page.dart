@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
+  final ScrollController scrollController;
   static const routeName = '/MenuPage';
+
+  const MenuPage({Key key, this.scrollController}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,23 +20,15 @@ class MenuPage extends StatelessWidget {
     List<Product> productsList = productProvider.products;
 
     return Container(
-      child: Stack(
-        children: [
-          ListView.builder(
-            padding: EdgeInsets.only(top: 140.0),
-            itemCount: productsList.length,
-            itemBuilder: (context, index) {
-              return ChangeNotifierProvider.value(
-                value: productsList[index],
-                child: MenuProducts(),
-              );
-            },
-          ),
-          ActionBar(
-            title: "Menu",
-            hasBackArrow: false,
-          ),
-        ],
+      child: ListView.builder(
+        padding: EdgeInsets.only(top: 20.0),
+        itemCount: productsList.length,
+        itemBuilder: (context, index) {
+          return ChangeNotifierProvider.value(
+            value: productsList[index],
+            child: MenuProducts(),
+          );
+        },
       ),
     );
   }
