@@ -46,7 +46,7 @@ class _ProductPageState extends State<ProductPage> {
                     height: 200,
                     width: size.width,
                     margin:
-                        EdgeInsets.only(top: 140.0, left: 24.0, right: 24.0),
+                        EdgeInsets.only(top: 120.0, left: 24.0, right: 24.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                       image: DecorationImage(
