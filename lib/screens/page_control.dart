@@ -21,26 +21,29 @@ class _PageControlState extends State<PageControl> {
     return Scaffold(
       body: SlidingUpPanel(
         controller: _panelController,
-        collapsed: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20.0),
-              topLeft: Radius.circular(20.0),
+        collapsed: GestureDetector(
+          onTap: _panelController.open,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.0),
+                topLeft: Radius.circular(20.0),
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 12.0),
-              dragIcon(),
-              const SizedBox(height: 12.0),
-              Text("Menu",
-                  style: TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                  )),
-            ],
+            child: Column(
+              children: [
+                const SizedBox(height: 12.0),
+                dragIcon(),
+                const SizedBox(height: 12.0),
+                Text("Menu",
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    )),
+              ],
+            ),
           ),
         ),
         maxHeight: MediaQuery.of(context).size.height,

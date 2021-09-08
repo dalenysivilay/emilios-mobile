@@ -14,9 +14,10 @@ class _BottomNav extends State<BottomNav> {
   int _selectedPageIndex = 0;
 
   final List<Widget> _pages = [
+    HomePage(),
     MenuPage(),
-    MenuPage(),
-    MenuPage(),
+    CartPage(),
+    AccountPage(),
   ];
 
   void _selectPage(int index) {
@@ -29,27 +30,41 @@ class _BottomNav extends State<BottomNav> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _pages[_selectedPageIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          onTap: _selectPage,
-          currentIndex: _selectedPageIndex,
-          iconSize: 26,
-          backgroundColor: Colors.white,
-          selectedItemColor: kPrimaryColor,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Home"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.restaurant),
-              title: Text("Menu"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              title: Text("Cart"),
-            ),
-          ],
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 8.0,
+            bottom: 8.0,
+          ),
+          color: Colors.white,
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            onTap: _selectPage,
+            currentIndex: _selectedPageIndex,
+            elevation: 0,
+            iconSize: 26,
+            backgroundColor: Colors.white,
+            selectedItemColor: kPrimaryColor,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.restaurant),
+                label: "Menu",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: "Cart",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: "Account",
+              ),
+            ],
+          ),
         ));
   }
 }

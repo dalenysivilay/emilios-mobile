@@ -1,4 +1,3 @@
-import 'package:emilios_market/constants.dart';
 import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/providers/product_provider.dart';
 import 'package:emilios_market/screens/cart_page/cart_page.dart';

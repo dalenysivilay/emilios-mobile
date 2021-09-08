@@ -1,7 +1,6 @@
 import 'package:emilios_market/widgets/action_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'components/personal_page.dart';
 
@@ -17,7 +16,7 @@ class AccountPage extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 140.0),
+              margin: EdgeInsets.only(top: 120.0),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(

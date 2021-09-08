@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emilios_market/constants.dart';
-import 'package:emilios_market/models/cart_model.dart';
+
 import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/screens/cart_page/cart_page.dart';
 import 'package:flutter/material.dart';
