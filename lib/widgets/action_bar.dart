@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 class ActionBar extends StatelessWidget {
   final String title;
+  final Function onTap;
   final bool hasBackArrow;
   final bool hasTitle;
 
@@ -16,6 +17,7 @@ class ActionBar extends StatelessWidget {
     this.title,
     this.hasBackArrow,
     this.hasTitle,
+    this.onTap,
   });
 
   //FirebaseServices _firebaseServices = FirebaseServices();
@@ -80,7 +82,7 @@ class ActionBar extends StatelessWidget {
             ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, CartPage.routeName);
+              onTap ?? Navigator.pushNamed(context, CartPage.routeName);
             },
             child: Container(
                 width: 42.0,

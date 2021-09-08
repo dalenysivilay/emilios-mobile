@@ -40,7 +40,11 @@ class _CartPageState extends State<CartPage> {
               body: Stack(
                 children: [
                   CartEmpty(),
-                  ActionBar(title: "Cart"),
+                  ActionBar(
+                    title: "Cart",
+                    hasBackArrow: false,
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
@@ -67,6 +71,7 @@ class _CartPageState extends State<CartPage> {
                   ActionBar(
                     title: "Cart",
                     hasBackArrow: true,
+                    onTap: () {},
                   ),
                 ],
               ),

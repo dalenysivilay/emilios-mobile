@@ -31,7 +31,10 @@ class MenuPage extends StatelessWidget {
             },
           ),
         ),
-        ActionBar(),
+        ActionBar(
+          title: "Menu",
+          hasBackArrow: false,
+        ),
       ],
     );
   }

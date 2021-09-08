@@ -34,6 +34,7 @@ class _ProductPageState extends State<ProductPage> {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final prodAttr = productsData.findById(productId);
     print("productId: $productId");
+
     return Scaffold(
       body: Stack(
         children: [
@@ -138,6 +139,37 @@ class _ProductPageState extends State<ProductPage> {
               },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Widget ContactItem(String ingredient, bool isSelected, int index) {
+    return ListTile(
+      title: Text(
+        ingredient,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      trailing: isSelected
+          ? Icon(
+              Icons.check_circle,
+              color: Colors.green[700],
+            )
+          : Icon(
+              Icons.check_circle_outline,
+              color: Colors.grey,
+            ),
+      onTap: () {
+        /* setState(() {
+          contacts[index].isSelected = !contacts[index].isSelected;
+          if (contacts[index].isSelected == true) {
+            selectedContacts.add(ContactModel(name, phoneNumber, true));
+          } else if (contacts[index].isSelected == false) {
+            selectedContacts
+                .removeWhere((element) => element.name == contacts[index].name);
+          }
+        }); */
+      },
     );
   }
 }
