@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emilios_market/models/product_model.dart';
 import 'package:emilios_market/providers/cart_provider.dart';
 import 'package:emilios_market/providers/product_provider.dart';
 import 'package:emilios_market/widgets/action_bar.dart';
+import 'package:emilios_market/widgets/ingredient_item.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +12,14 @@ import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {
   static const routeName = '/ProductPage';
+  final List<Product> products;
+  final bool isMultiSelection;
+
+  const ProductPage({
+    Key key,
+    this.products = const [],
+    this.isMultiSelection = true,
+  }) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -19,6 +29,7 @@ class _ProductPageState extends State<ProductPage> {
   String _meats;
   double subtotal = 0.0;
   double upCharge = 0.0;
+  List<Product> selectedIngr = [];
 
   //User -> UserID (Doc) -> Cart ->
   final CollectionReference _usersRef =
@@ -27,9 +38,18 @@ class _ProductPageState extends State<ProductPage> {
   User _user = FirebaseAuth.instance.currentUser;
 
   @override
+  void initState() {
+    super.initState();
+
+    selectedIngr = widget.products;
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productsData = Provider.of<ProductProvider>(context, listen: false);
+    final allIngredients = productsData.products;
+    final _ingredients = allIngredients.toList();
     final cartProvider = Provider.of<CartProvider>(context);
     final productId = ModalRoute.of(context).settings.arguments as String;
     final prodAttr = productsData.findById(productId);
@@ -117,7 +137,21 @@ class _ProductPageState extends State<ProductPage> {
                       },
                     ),
                   ),
-
+                  /* Ingredients List
+                  const SizedBox(height: 15.0),
+                  Container(
+                    child: ListView(
+                      children: _ingredients.map((product) {
+                        final isSelected = selectedIngr.contains(product);
+                        return IngredientItem(
+                          product: product,
+                          isSelected: isSelected,
+                          onSelectedIngr: selectIngr,
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                   */
                   const SizedBox(height: 90.0),
                 ],
               ),
@@ -142,34 +176,14 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget ContactItem(String ingredient, bool isSelected, int index) {
-    return ListTile(
-      title: Text(
-        ingredient,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      trailing: isSelected
-          ? Icon(
-              Icons.check_circle,
-              color: Colors.green[700],
-            )
-          : Icon(
-              Icons.check_circle_outline,
-              color: Colors.grey,
-            ),
-      onTap: () {
-        /* setState(() {
-          contacts[index].isSelected = !contacts[index].isSelected;
-          if (contacts[index].isSelected == true) {
-            selectedContacts.add(ContactModel(name, phoneNumber, true));
-          } else if (contacts[index].isSelected == false) {
-            selectedContacts
-                .removeWhere((element) => element.name == contacts[index].name);
-          }
-        }); */
-      },
-    );
+  void selectIngr(Product product) {
+    if (widget.isMultiSelection) {
+      final isSelected = selectedIngr.contains(product);
+      setState(() => isSelected
+          ? selectedIngr.remove(product)
+          : selectedIngr.add(product));
+    } else {
+      Navigator.pop(context, product);
+    }
   }
 }
