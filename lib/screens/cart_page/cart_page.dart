@@ -3,7 +3,6 @@ import 'package:emilios_market/screens/cart_page/components/cart_empty.dart';
 import 'package:emilios_market/screens/cart_page/components/cart_full.dart';
 import 'package:emilios_market/widgets/action_bar.dart';
 import 'package:emilios_market/widgets/rounded_button.dart';
-import 'package:emilios_market/services/stripe_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,17 +17,6 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    StripeService.init();
-  }
-
-  void payWithCard({int amount}) async {
-    CircularProgressIndicator();
-    var response = await StripeService.payWithNewCard(
-        currency: 'USD', amount: amount.toString());
-    Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(response.message),
-        duration:
-            Duration(milliseconds: response.success == true ? 1200 : 3000)));
   }
 
   @override
@@ -176,7 +164,7 @@ class _CartPageState extends State<CartPage> {
                   onPressed: () {
                     double amountInCents = totalAmount * 1000;
                     int integerAmount = (amountInCents / 10).ceil();
-                    payWithCard(amount: integerAmount);
+                    // payWithCard(amount: integerAmount);
                   },
                 ),
               ),
