@@ -3,7 +3,6 @@ import 'package:emilios_grocery/screens/register_page.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:emilios_grocery/widgets/rounded_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   //Create alert builder
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
@@ -46,14 +44,15 @@ class _LoginPageState extends State<LoginPage> {
   Future<String> _loginAccount() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _loginEmail.toLowerCase().trim(),
-          password: _loginPassword.trim());
+        email: _loginEmail.toLowerCase().trim(),
+        password: _loginPassword.trim(),
+      );
       return null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        return 'The account already exists for that email.';
+        return 'An account already exists for that email.';
       }
       return e.message;
     } catch (e) {
