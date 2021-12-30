@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   //Create alert builder
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
