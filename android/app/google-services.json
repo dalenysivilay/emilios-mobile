@@ -1,49 +1,42 @@
 {
   "project_info": {
-    "project_number": "572817426109",
-    "project_id": "emilios-market",
-    "storage_bucket": "emilios-market.appspot.com"
+    "project_number": "317671794772",
+    "project_id": "emilios-grocery",
+    "storage_bucket": "emilios-grocery.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:572817426109:android:1a5dc10043690a92d819d4",
+        "mobilesdk_app_id": "1:317671794772:android:276ab403dfcdeda42ca5c1",
         "android_client_info": {
-          "package_name": "com.wisedigitalhq.emiliosMarket"
+          "package_name": "com.dalenysivilay.emiliosGrocery"
         }
       },
       "oauth_client": [
         {
-          "client_id": "572817426109-eu4jgc28a74t39pmnsjv00gu0k9ojuih.apps.googleusercontent.com",
+          "client_id": "317671794772-grtk724v5fn6g258f6v5pkau6k1aaf8m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.wisedigitalhq.emiliosMarket",
-            "certificate_hash": "5fa74c5cea5992fc29e6eb3811768df8aeabed36"
+            "package_name": "com.dalenysivilay.emiliosGrocery",
+            "certificate_hash": "264ba05da674dac9c7e78cf089fee8239af27d72"
           }
         },
         {
-          "client_id": "572817426109-2q45b0d7utjd7ig45o4qjcb2gre1d0kp.apps.googleusercontent.com",
+          "client_id": "317671794772-tmuv9jsrdjfdrmot9g523bv1k7ec9lep.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPx_1boyROMT7d_TewL4L0MerFER3ylAw"
+          "current_key": "AIzaSyBgVZ6JgZOOz3VcqANXG2GfNPsfYAJfNT8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "572817426109-2q45b0d7utjd7ig45o4qjcb2gre1d0kp.apps.googleusercontent.com",
+              "client_id": "317671794772-tmuv9jsrdjfdrmot9g523bv1k7ec9lep.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "572817426109-9mjnu5fl1562u976rhd2m0spdn9o8a49.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.wisedigitalhq.emiliosApp"
-              }
             }
           ]
         }
