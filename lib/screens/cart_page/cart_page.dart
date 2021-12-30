@@ -4,6 +4,7 @@ import 'package:emilios_grocery/screens/cart_page/components/cart_full.dart';
 import 'package:emilios_grocery/widgets/action_bar.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -161,10 +162,9 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(bottom: 24.0),
                 child: RoundedButton(
                   text: "Continue to Payment",
-                  onPressed: () {
-                    // double amountInCents = totalAmount * 1000;
-                    // int integerAmount = (amountInCents / 10).ceil();
-                    // payWithCard(amount: integerAmount);
+                  onPressed: () async {
+                    final paymentMethod = await Stripe.instance
+                        .createPaymentMethod(PaymentMethodParams.card());
                   },
                 ),
               ),
