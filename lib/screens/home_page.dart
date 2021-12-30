@@ -1,4 +1,5 @@
 import 'package:emilios_grocery/providers/product_provider.dart';
+import 'package:emilios_grocery/screens/google_map_page.dart';
 import 'package:emilios_grocery/widgets/action_bar.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     RoundedButton(
                       text: "View Location",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GoogleMapPage(),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

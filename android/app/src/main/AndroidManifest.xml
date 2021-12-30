@@ -3,6 +3,8 @@
    <application
         android:label="emilios_grocery"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCBLO1zvRbEZoABS6pTC1i_aCPYRNjT9IY"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
