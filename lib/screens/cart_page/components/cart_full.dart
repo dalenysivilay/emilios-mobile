@@ -14,12 +14,12 @@ class CartFull extends StatefulWidget {
 
   const CartFull(
       {Key key,
-      @required this.id,
-      @required this.productId,
-      @required this.price,
-      @required this.quantity,
-      @required this.name,
-      @required this.images})
+      this.id,
+      this.productId,
+      this.price,
+      this.quantity,
+      this.name,
+      this.images})
       : super(key: key);
   @override
   _CartFullState createState() => _CartFullState();

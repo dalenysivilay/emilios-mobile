@@ -162,8 +162,8 @@ class _CartPageState extends State<CartPage> {
                 child: RoundedButton(
                   text: "Continue to Payment",
                   onPressed: () {
-                    double amountInCents = totalAmount * 1000;
-                    int integerAmount = (amountInCents / 10).ceil();
+                    // double amountInCents = totalAmount * 1000;
+                    // int integerAmount = (amountInCents / 10).ceil();
                     // payWithCard(amount: integerAmount);
                   },
                 ),

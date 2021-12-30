@@ -3,10 +3,8 @@ import 'package:emilios_grocery/models/product_model.dart';
 import 'package:emilios_grocery/providers/cart_provider.dart';
 import 'package:emilios_grocery/providers/product_provider.dart';
 import 'package:emilios_grocery/widgets/action_bar.dart';
-import 'package:emilios_grocery/widgets/ingredient_item.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
