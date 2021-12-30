@@ -1,5 +1,5 @@
-import 'package:emilios_market/constants.dart';
-import 'package:emilios_market/widgets/bottom_nav.dart';
+import 'package:emilios_grocery/constants.dart';
+import 'package:emilios_grocery/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

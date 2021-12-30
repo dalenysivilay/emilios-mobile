@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emilios_market/screens/login_page.dart';
-import 'package:emilios_market/widgets/rounded_button.dart';
-import 'package:emilios_market/widgets/rounded_input_field.dart';
+import 'package:emilios_grocery/screens/login_page.dart';
+import 'package:emilios_grocery/widgets/rounded_button.dart';
+import 'package:emilios_grocery/widgets/rounded_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

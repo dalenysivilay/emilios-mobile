@@ -1,4 +1,4 @@
-# emilios_market
+# emilios_grocery
 
 Food ordering app for Emilio's Market
 

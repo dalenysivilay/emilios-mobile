@@ -1,6 +1,6 @@
-import 'package:emilios_market/constants.dart';
-import 'package:emilios_market/screens/menu_page.dart';
-import 'package:emilios_market/widgets/rounded_button.dart';
+import 'package:emilios_grocery/constants.dart';
+import 'package:emilios_grocery/screens/menu_page.dart';
+import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';

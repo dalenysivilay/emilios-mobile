@@ -1,7 +1,7 @@
-import 'package:emilios_market/models/product_model.dart';
-import 'package:emilios_market/providers/product_provider.dart';
-import 'package:emilios_market/widgets/action_bar.dart';
-import 'package:emilios_market/widgets/product_card.dart';
+import 'package:emilios_grocery/models/product_model.dart';
+import 'package:emilios_grocery/providers/product_provider.dart';
+import 'package:emilios_grocery/widgets/action_bar.dart';
+import 'package:emilios_grocery/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

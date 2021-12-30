@@ -1,4 +1,4 @@
-import 'package:emilios_market/models/cart_model.dart';
+import 'package:emilios_grocery/models/cart_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartProvider with ChangeNotifier {

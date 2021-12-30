@@ -1,5 +1,5 @@
-import 'package:emilios_market/screens/login_page.dart';
-import 'package:emilios_market/widgets/bottom_nav.dart';
+import 'package:emilios_grocery/screens/login_page.dart';
+import 'package:emilios_grocery/widgets/bottom_nav.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

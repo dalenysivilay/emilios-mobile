@@ -1,8 +1,8 @@
-import 'package:emilios_market/providers/cart_provider.dart';
-import 'package:emilios_market/screens/cart_page/components/cart_empty.dart';
-import 'package:emilios_market/screens/cart_page/components/cart_full.dart';
-import 'package:emilios_market/widgets/action_bar.dart';
-import 'package:emilios_market/widgets/rounded_button.dart';
+import 'package:emilios_grocery/providers/cart_provider.dart';
+import 'package:emilios_grocery/screens/cart_page/components/cart_empty.dart';
+import 'package:emilios_grocery/screens/cart_page/components/cart_full.dart';
+import 'package:emilios_grocery/widgets/action_bar.dart';
+import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,4 +1,4 @@
-import 'package:emilios_market/models/product_model.dart';
+import 'package:emilios_grocery/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class IngredientItem extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emilios_market/models/product_model.dart';
+import 'package:emilios_grocery/models/product_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProductProvider with ChangeNotifier {

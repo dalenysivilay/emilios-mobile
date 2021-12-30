@@ -1,4 +1,4 @@
-import 'package:emilios_market/widgets/rounded_button.dart';
+import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 Widget checkoutSection(BuildContext context) {
