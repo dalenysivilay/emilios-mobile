@@ -9,11 +9,13 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // set the publishable key for Stripe - this is mandatory
   Stripe.publishableKey =
       "pk_test_51J5LrvGYanMuZ0VtBxKsummLvVTsn5zeMTtCBQtZLFZCSOKXGRpMbtZ9uweziazX1Z6NrivtvSDiW6oHOmGa5tZz00pArSUKYN";
+  Stripe.merchantIdentifier = 'any string works';
+  await Stripe.instance.applySettings();
   runApp(
     MultiProvider(
       providers: [
