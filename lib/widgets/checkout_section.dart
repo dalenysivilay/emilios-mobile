@@ -1,82 +1,73 @@
-import 'package:emilios_grocery/providers/cart_provider.dart';
-import 'package:emilios_grocery/screens/cart_page/components/cart_empty.dart';
-import 'package:emilios_grocery/screens/cart_page/components/cart_full.dart';
-import 'package:emilios_grocery/widgets/action_bar.dart';
-import 'package:emilios_grocery/widgets/checkout_section.dart';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:http/http.dart' as http;
 
-class CartPage extends StatefulWidget {
-  static const routeName = '/CartPage';
+class CheckoutSection extends StatelessWidget {
+  final double subTotal;
+  final double taxAmount;
+  final double totalAmount;
 
-  @override
-  _CartPageState createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  const CheckoutSection({
+    Key key,
+    this.subTotal,
+    this.taxAmount,
+    this.totalAmount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
-    return cartProvider.getCartItems.isEmpty
-        ? Container(
-            child: Scaffold(
-              body: Stack(
-                children: [
-                  CartEmpty(),
-                  ActionBar(
-                    title: "Cart",
-                    hasBackArrow: false,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          )
-        : Container(
-            child: Scaffold(
-              body: Stack(
-                children: [
-                  ListView.builder(
-                    padding: EdgeInsets.only(top: 140.0, bottom: 0),
-                    itemCount: cartProvider.getCartItems.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ChangeNotifierProvider.value(
-                        value: cartProvider.getCartItems.values.toList()[index],
-                        child: CartFull(
-                          productId:
-                              cartProvider.getCartItems.keys.toList()[index],
-                        ),
-                      );
-                    },
-                  ),
-                  CheckoutSection(
-                    subTotal: cartProvider.subtotalAmount,
-                    taxAmount: cartProvider.taxAmount,
-                    totalAmount: cartProvider.totalAmount,
-                  ),
-                  ActionBar(
-                    title: "Cart",
-                    hasBackArrow: true,
-                    onTap: () {},
-                  ),
-                ],
-              ),
+    Future<void> initPaymentSheet(context,
+        {@required String email, @required int amount}) async {
+      try {
+        // 1. create payment intent on the server
+        final response = await http.post(
+            Uri.parse(
+                'https://us-central1-emilios-grocery.cloudfunctions.net/stripePaymentIntentRequest'),
+            body: {
+              'email': email,
+              'amount': amount.toString(),
+            });
+
+        final jsonResponse = jsonDecode(response.body);
+        log(jsonResponse.toString());
+
+        //2. initialize the payment sheet
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+            paymentIntentClientSecret: jsonResponse['paymentIntent'],
+            merchantDisplayName: 'Emilios Grocery',
+            customerId: jsonResponse['customer'],
+            customerEphemeralKeySecret: jsonResponse['ephemeralKey'],
+            style: ThemeMode.light,
+            testEnv: true,
+            merchantCountryCode: 'US',
+          ),
+        );
+
+        await Stripe.instance.presentPaymentSheet();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Payment completed!')),
+        );
+      } catch (e) {
+        if (e is StripeException) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error from Stripe: ${e.error.localizedMessage}'),
             ),
           );
-  }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: $e')),
+          );
+        }
+      }
+    }
 
-  Widget checkoutSection(
-    BuildContext context,
-    double subTotal,
-    double taxAmount,
-    double totalAmount,
-  ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -165,7 +156,15 @@ class _CartPageState extends State<CartPage> {
                 margin: EdgeInsets.only(bottom: 24.0),
                 child: RoundedButton(
                   text: "Continue to Payment",
-                  onPressed: () {},
+                  onPressed: () async {
+                    double amountInCents = totalAmount * 1000;
+                    int integerAmount = (amountInCents / 10).ceil();
+                    await initPaymentSheet(
+                      context,
+                      email: "dalenysivilay@gmail.com",
+                      amount: integerAmount,
+                    );
+                  },
                 ),
               ),
             ],

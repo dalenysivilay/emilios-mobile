@@ -4,23 +4,32 @@ import 'package:emilios_grocery/screens/cart_page/cart_page.dart';
 import 'package:emilios_grocery/screens/landing_page.dart';
 import 'package:emilios_grocery/screens/menu_page.dart';
 import 'package:emilios_grocery/screens/product_page.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => ProductProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => CartProvider(),
-          ),
-        ],
-        child: MyApp(),
-      ),
-    );
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // set the publishable key for Stripe - this is mandatory
+  Stripe.publishableKey =
+      "pk_test_51J5LrvGYanMuZ0VtBxKsummLvVTsn5zeMTtCBQtZLFZCSOKXGRpMbtZ9uweziazX1Z6NrivtvSDiW6oHOmGa5tZz00pArSUKYN";
+  Stripe.merchantIdentifier = 'any string works';
+  await Stripe.instance.applySettings();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
