@@ -4,6 +4,7 @@ import 'package:emilios_grocery/screens/cart_page/cart_page.dart';
 import 'package:emilios_grocery/screens/landing_page.dart';
 import 'package:emilios_grocery/screens/menu_page.dart';
 import 'package:emilios_grocery/screens/product_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
       "pk_test_51J5LrvGYanMuZ0VtBxKsummLvVTsn5zeMTtCBQtZLFZCSOKXGRpMbtZ9uweziazX1Z6NrivtvSDiW6oHOmGa5tZz00pArSUKYN";
   Stripe.merchantIdentifier = 'any string works';
   await Stripe.instance.applySettings();
+  GestureBinding.instance.resamplingEnabled = true;
   runApp(
     MultiProvider(
       providers: [
