@@ -17,6 +17,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   http: ^0.13.3
   provider: ^5.0.0
+  uuid: ^3.0.5
   google_fonts: ^2.1.0
   flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2

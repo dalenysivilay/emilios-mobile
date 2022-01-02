@@ -3,7 +3,6 @@ import 'package:emilios_grocery/screens/cart_page/components/cart_empty.dart';
 import 'package:emilios_grocery/screens/cart_page/components/cart_full.dart';
 import 'package:emilios_grocery/widgets/action_bar.dart';
 import 'package:emilios_grocery/widgets/checkout_section.dart';
-import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +23,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     return cartProvider.getCartItems.isEmpty
+        // Cart is Empty
         ? Container(
             child: Scaffold(
               body: Stack(
@@ -38,6 +38,7 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           )
+        // Cart is Full
         : Container(
             child: Scaffold(
               body: Stack(
@@ -69,109 +70,5 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           );
-  }
-
-  Widget checkoutSection(
-    BuildContext context,
-    double subTotal,
-    double taxAmount,
-    double totalAmount,
-  ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, 0.5),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              //Totals Row
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
-                child: Column(
-                  children: [
-                    //Subtotal Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Subtotal",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        Text(
-                          "\$ ${subTotal.toStringAsFixed(2)}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5.0),
-                    //Taxes Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Tax",
-                          style: TextStyle(fontSize: 14.0),
-                        ),
-                        Text(
-                          "\$ ${taxAmount.toStringAsFixed(2)}",
-                          style: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5.0),
-                    //Total Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Total",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        Text(
-                          "\$ ${totalAmount.toStringAsFixed(2)}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5.0),
-                    //Continue to Payment Button
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 24.0),
-                child: RoundedButton(
-                  text: "Continue to Payment",
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

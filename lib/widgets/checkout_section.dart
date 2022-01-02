@@ -1,10 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emilios_grocery/providers/cart_provider.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class CheckoutSection extends StatelessWidget {
   final double subTotal;
@@ -20,6 +25,11 @@ class CheckoutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var uuid = Uuid();
+    var orderSuccess = false;
+    final cartProvider = Provider.of<CartProvider>(context);
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
     Future<void> initPaymentSheet(context,
         {@required String email, @required int amount}) async {
       try {
@@ -50,6 +60,7 @@ class CheckoutSection extends StatelessWidget {
 
         await Stripe.instance.presentPaymentSheet();
 
+        orderSuccess = true;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Payment completed!')),
         );
@@ -57,7 +68,7 @@ class CheckoutSection extends StatelessWidget {
         if (e is StripeException) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Error from Stripe: ${e.error.localizedMessage}'),
+              content: Text('${e.error.localizedMessage}'),
             ),
           );
         } else {
@@ -157,13 +168,42 @@ class CheckoutSection extends StatelessWidget {
                 child: RoundedButton(
                   text: "Continue to Payment",
                   onPressed: () async {
+                    User user = _auth.currentUser;
+                    final _uid = user.uid;
                     double amountInCents = totalAmount * 1000;
                     int integerAmount = (amountInCents / 10).ceil();
+                    // Stripe Payment Sheet
                     await initPaymentSheet(
                       context,
-                      email: "dalenysivilay@gmail.com",
+                      email: user.email,
                       amount: integerAmount,
                     );
+                    // Firebase Orders
+                    if (orderSuccess == true) {
+                      cartProvider.getCartItems.forEach(
+                        (key, orderValue) async {
+                          final orderId = uuid.v4();
+                          try {
+                            await FirebaseFirestore.instance
+                                .collection('orders')
+                                .doc(orderId)
+                                .set({
+                              'orderId': orderId,
+                              'userId': _uid,
+                              'productId': orderValue.id,
+                              'title': orderValue.name,
+                              'quantity': orderValue.quantity,
+                              'price': orderValue.price * orderValue.quantity,
+                              'orderDate': Timestamp.now(),
+                            });
+                          } catch (err) {
+                            print("Error occurred in $err");
+                          }
+                        },
+                      );
+                      // Clears orderSuccess after order is completed.
+                      orderSuccess = false;
+                    }
                   },
                 ),
               ),
