@@ -1,3 +1,4 @@
+import 'package:emilios_grocery/widgets/top_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -25,8 +26,8 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Location"),
+      appBar: TopAppBar(
+        title: "Our Location",
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
