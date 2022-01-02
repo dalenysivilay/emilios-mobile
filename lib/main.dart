@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         //   '/': (ctx) => LandingPage(),
         ProductPage.routeName: (ctx) => ProductPage(),
         CartPage.routeName: (ctx) => CartPage(),
-        MenuPage.routeName: (ctx) => MenuPage(),
+        ProductPage.routeName: (ctx) => ProductPage(),
       },
     );
   }

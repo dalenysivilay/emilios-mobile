@@ -1,9 +1,9 @@
 import 'package:emilios_grocery/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:emilios_grocery/screens/account_page/account_page.dart';
+import 'package:emilios_grocery/screens/cart_page/cart_page.dart';
 import 'package:emilios_grocery/screens/home_page.dart';
 import 'package:emilios_grocery/screens/menu_page.dart';
-import 'package:emilios_grocery/screens/cart_page/cart_page.dart';
-import 'package:emilios_grocery/screens/account_page/account_page.dart';
+import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
   @override

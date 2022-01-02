@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
   final ScrollController scrollController;
-  static const routeName = '/MenuPage';
+  static const routeName = '/ProductPage';
 
   const MenuPage({Key key, this.scrollController}) : super(key: key);
 
