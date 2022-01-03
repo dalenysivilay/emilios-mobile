@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class Orders with ChangeNotifier {
   final String orderId;
+  final String orderNum;
   final String userId;
   final String productId;
   final String title;
@@ -12,6 +13,7 @@ class Orders with ChangeNotifier {
 
   Orders({
     this.orderId,
+    this.orderNum,
     this.userId,
     this.productId,
     this.title,
