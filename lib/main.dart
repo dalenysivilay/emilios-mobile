@@ -2,9 +2,9 @@ import 'package:emilios_grocery/providers/cart_provider.dart';
 import 'package:emilios_grocery/providers/product_provider.dart';
 import 'package:emilios_grocery/screens/cart_page/cart_page.dart';
 import 'package:emilios_grocery/screens/landing_page.dart';
-import 'package:emilios_grocery/screens/menu_page.dart';
 import 'package:emilios_grocery/screens/product_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +38,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
         primaryColor: Colors.white,
         primarySwatch: Colors.red,
         textTheme: GoogleFonts.nunitoSansTextTheme(

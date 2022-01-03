@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emilios_grocery/providers/cart_provider.dart';
-import 'package:emilios_grocery/screens/landing_page.dart';
+import 'package:emilios_grocery/screens/order-confirmation.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class CheckoutSection extends StatelessWidget {
             });
 
         final jsonResponse = jsonDecode(response.body);
-        log(jsonResponse.toString());
+        // log(jsonResponse.toString());
 
         //2. initialize the payment sheet
         await Stripe.instance.initPaymentSheet(
@@ -61,13 +60,11 @@ class CheckoutSection extends StatelessWidget {
 
         await Stripe.instance.presentPaymentSheet();
 
+        //Sets order state
         orderSuccess = true;
+        //Order success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Payment completed!')),
-        );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LandingPage()),
         );
       } catch (e) {
         if (e is StripeException) {
@@ -194,6 +191,7 @@ class CheckoutSection extends StatelessWidget {
                                 .doc(orderId)
                                 .set({
                               'orderId': orderId,
+                              'orderNum': "324",
                               'userId': _uid,
                               'productId': orderValue.productId,
                               'title': orderValue.name,
@@ -209,6 +207,14 @@ class CheckoutSection extends StatelessWidget {
                       // Clears orderSuccess after order is completed.
                       cartProvider.clearCart();
                       orderSuccess = false;
+                      //Redirect to Order Confirmation
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              OrderConfirmation(orderId: "324", userId: _uid),
+                        ),
+                      );
                     }
                   },
                 ),

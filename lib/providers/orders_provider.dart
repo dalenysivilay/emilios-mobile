@@ -24,6 +24,7 @@ class OrdersProvider with ChangeNotifier {
             0,
             Orders(
               orderId: element.get('orderId'),
+              orderNum: element.get('orderNum'),
               productId: element.get('productId'),
               userId: element.get('userId'),
               price: element.get('price').toString(),

@@ -1,5 +1,4 @@
 import 'package:emilios_grocery/constants.dart';
-import 'package:emilios_grocery/screens/menu_page.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,9 +44,7 @@ class CartEmpty extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 24.0),
               child: RoundedButton(
                 text: "See Menu",
-                onPressed: () {
-                  Navigator.pushNamed(context, MenuPage.routeName);
-                },
+                onPressed: () {},
               ),
             ),
           ],
