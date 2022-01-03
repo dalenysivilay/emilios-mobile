@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emilios_grocery/providers/cart_provider.dart';
+import 'package:emilios_grocery/screens/landing_page.dart';
 import 'package:emilios_grocery/widgets/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,10 @@ class CheckoutSection extends StatelessWidget {
         orderSuccess = true;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Payment completed!')),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LandingPage()),
         );
       } catch (e) {
         if (e is StripeException) {
@@ -190,7 +195,7 @@ class CheckoutSection extends StatelessWidget {
                                 .set({
                               'orderId': orderId,
                               'userId': _uid,
-                              'productId': orderValue.id,
+                              'productId': orderValue.productId,
                               'title': orderValue.name,
                               'quantity': orderValue.quantity,
                               'price': orderValue.price * orderValue.quantity,
@@ -202,6 +207,7 @@ class CheckoutSection extends StatelessWidget {
                         },
                       );
                       // Clears orderSuccess after order is completed.
+                      cartProvider.clearCart();
                       orderSuccess = false;
                     }
                   },

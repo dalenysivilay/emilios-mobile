@@ -37,6 +37,7 @@ class CartProvider with ChangeNotifier {
           productId,
           (existingCartItem) => CartModel(
                 id: existingCartItem.id,
+                productId: existingCartItem.productId,
                 name: existingCartItem.name,
                 meats: existingCartItem.meats,
                 price: existingCartItem.price,
@@ -52,6 +53,7 @@ class CartProvider with ChangeNotifier {
           productId,
           (existingCartItem) => CartModel(
                 id: existingCartItem.id,
+                productId: existingCartItem.productId,
                 name: existingCartItem.name,
                 meats: existingCartItem.meats,
                 price: existingCartItem.price,
@@ -63,6 +65,7 @@ class CartProvider with ChangeNotifier {
           productId,
           () => CartModel(
                 id: DateTime.now().toString(),
+                productId: productId,
                 name: name,
                 meats: meats,
                 price: price,
@@ -80,6 +83,7 @@ class CartProvider with ChangeNotifier {
           productId,
           (existingCartItem) => CartModel(
               id: existingCartItem.id,
+              productId: existingCartItem.productId,
               name: existingCartItem.name,
               meats: existingCartItem.meats,
               price: existingCartItem.price,
