@@ -6,6 +6,12 @@ import 'package:emilios_grocery/screens/menu_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
+  final int index;
+
+  const BottomNav({
+    Key key,
+    this.index,
+  }) : super(key: key);
   @override
   _BottomNav createState() => _BottomNav();
 }
