@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emilios_grocery/models/orders_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:emilios_grocery/services/firebase_services.dart';
 import 'package:flutter/cupertino.dart';
 
 class OrdersProvider with ChangeNotifier {
@@ -10,9 +10,8 @@ class OrdersProvider with ChangeNotifier {
   }
 
   Future<void> fetchOrders() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    User _user = _auth.currentUser;
-    var _uid = _user.uid;
+    FirebaseServices _firebaseServices = FirebaseServices();
+    var _uid = _firebaseServices.getUserId();
     await FirebaseFirestore.instance
         .collection('orders')
         .where('userId', isEqualTo: _uid)
