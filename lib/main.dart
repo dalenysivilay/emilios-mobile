@@ -39,7 +39,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+          ),
         ),
         primaryColor: Colors.white,
         primarySwatch: Colors.red,
@@ -52,7 +54,6 @@ class MyApp extends StatelessWidget {
         //   '/': (ctx) => LandingPage(),
         ProductPage.routeName: (ctx) => ProductPage(),
         CartPage.routeName: (ctx) => CartPage(),
-        ProductPage.routeName: (ctx) => ProductPage(),
       },
     );
   }

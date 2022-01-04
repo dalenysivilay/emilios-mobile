@@ -37,7 +37,7 @@ class OrderConfirmation extends StatelessWidget {
           },
           child: Icon(
             Icons.arrow_back_ios_new,
-            color: Colors.red,
+            color: Colors.white,
             size: 16.0,
           ),
         ),
